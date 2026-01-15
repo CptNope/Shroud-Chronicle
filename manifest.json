@@ -1,0 +1,21 @@
+{
+  "short_name": "ShroudChronicle",
+  "name": "The Shroud Chronicle",
+  "icons": [
+    {
+      "src": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Secundo_Pia_Turinske_platno_1898.jpg",
+      "type": "image/jpeg",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Secundo_Pia_Turinske_platno_1898.jpg",
+      "type": "image/jpeg",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#0a0a0a",
+  "background_color": "#0a0a0a",
+  "orientation": "portrait"
+}

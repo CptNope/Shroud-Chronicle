@@ -1,0 +1,5 @@
+{
+  "name": "ShroudChronicle",
+  "description": "A Dual-Lens Progressive Web Application visualizing the history, science, and controversy of the Shroud of Turin.",
+  "requestFramePermissions": []
+}
