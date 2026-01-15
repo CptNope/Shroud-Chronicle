@@ -19,12 +19,18 @@ export const UpdateNotification: React.FC = () => {
 
     // Also check if one is already waiting on mount
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistration().then(reg => {
-        if (reg && reg.waiting) {
-          setWaitingWorker(reg.waiting);
-          setShow(true);
-        }
-      });
+      navigator.serviceWorker.getRegistration()
+        .then(reg => {
+          if (reg && reg.waiting) {
+            setWaitingWorker(reg.waiting);
+            setShow(true);
+          }
+        })
+        .catch(err => {
+          // In preview environments (like AI Studio), SW access might be restricted due to origin mismatch.
+          // We catch this to prevent the app from crashing.
+          console.warn('Service Worker access failed (likely due to preview environment restrictions):', err);
+        });
     }
 
     return () => window.removeEventListener('swUpdated', handleSWUpdate);
