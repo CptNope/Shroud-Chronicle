@@ -4,6 +4,8 @@
 
 Unlike traditional resources that often bias heavily toward either religious devotion or secular dismissal, this application implements a **"Dual-Lens" architecture**. This allows users to toggle the entire application state between a **"Believer" (Authenticity)** perspective and a **"Skeptic" (Medieval Artistry)** perspective, visualizing how the same raw data can lead to vastly different conclusions.
 
+### 🔗 Live Demo: [https://cptnope.github.io/Shroud-Chronicle/](https://cptnope.github.io/Shroud-Chronicle/)
+
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Version](https://img.shields.io/badge/version-1.1.0-green.svg)
 ![PWA](https://img.shields.io/badge/PWA-Offline%20Ready-orange.svg)
