@@ -11,55 +11,61 @@
     
     <!-- Modern mobile web app capability -->
     <meta name="mobile-web-app-capable" content="yes">
-    <!-- Legacy iOS capability (kept for backward compatibility, though deprecated in some contexts) -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
     
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="ShroudChronicle">
 
-    <!-- Icons -->
-    <link rel="icon" type="image/jpeg" href="https://upload.wikimedia.org/wikipedia/commons/e/ec/Secundo_Pia_Turinske_platno_1898.jpg">
-    <link rel="apple-touch-icon" href="https://upload.wikimedia.org/wikipedia/commons/e/ec/Secundo_Pia_Turinske_platno_1898.jpg">
+    <!-- Embedded SVG Favicon to prevent 404s and external dependency issues -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%230a0a0a'/%3E%3Cpath d='M50 10 A40 40 0 0 0 50 90 A40 40 0 0 0 50 10 Z' fill='%23f59e0b' opacity='0.5'/%3E%3Cpath d='M50 10 A40 40 0 0 1 50 90 A40 40 0 0 1 50 10 Z' fill='%2322d3ee' opacity='0.5'/%3E%3C/svg%3E">
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Configure Tailwind to support dark mode manually if needed
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              neutral: {
+                950: '#0a0a0a',
+              }
+            }
+          }
+        }
+      }
+    </script>
     <style>
       body {
         background-color: #0a0a0a;
-        /* Safe area padding for iPhones with notches */
         padding-top: env(safe-area-inset-top);
         padding-bottom: env(safe-area-inset-bottom);
       }
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #0a0a0a; 
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #333; 
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #555; 
-      }
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: #0a0a0a; }
+      ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: #555; }
     </style>
-  <script type="importmap">
+    <script type="importmap">
 {
   "imports": {
     "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react-dom/client": "https://esm.sh/react-dom@^19.2.3/client",
+    "react-dom": "https://esm.sh/react-dom@^19.2.3",
     "recharts": "https://esm.sh/recharts@^3.6.0",
-    "react/": "https://esm.sh/react@^19.2.3/",
     "react": "https://esm.sh/react@^19.2.3",
-    "@google/genai": "https://esm.sh/@google/genai@^1.36.0"
+    "@google/genai": "https://esm.sh/@google/genai@^1.36.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/"
   }
 }
 </script>
-</head>
+  </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    
+    <!-- App Entry Point -->
+    <script type="module" src="./index.tsx"></script>
 
     <!-- Service Worker Registration -->
     <script>
@@ -67,13 +73,10 @@
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('./sw.js').then((registration) => {
             console.log('SW registered: ', registration);
-            
-            // Check for updates
             registration.addEventListener('updatefound', () => {
               const newWorker = registration.installing;
               newWorker.addEventListener('statechange', () => {
                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  // Dispatch event so React can show a notification
                   window.dispatchEvent(new CustomEvent('swUpdated', { detail: registration }));
                 }
               });
@@ -83,7 +86,6 @@
           });
         });
 
-        // Ensure the page reloads when the new SW takes control
         let refreshing;
         navigator.serviceWorker.addEventListener('controllerchange', () => {
           if (!refreshing) {
