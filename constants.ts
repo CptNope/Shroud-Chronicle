@@ -1,4 +1,4 @@
-import { TimelineEvent, LabModule, ViralClaim, ArtifactHotspot, STURPPaper } from './types';
+import { TimelineEvent, LabModule, ViralClaim, ArtifactHotspot, STURPPaper, STURPOfficialSummary } from './types';
 
 export const APP_VERSION = '1.1.0';
 
@@ -1198,3 +1198,85 @@ export const STURP_PAPERS: STURPPaper[] = [
   { id: 39, authors: 'Meacham, William (Archivist)', title: 'STURP II Testing Proposals 1984-88', publication: 'Archived Collection', year: 1988, pdfUrl: 'http://shroud.com/pdfs/STURP%20Formal%20Proposal%201984.pdf', category: 'PROCEEDINGS', notes: 'Collection includes 1984, 1987, and 1988 testing proposals' },
   { id: 40, authors: 'Lukasik, S.J.', title: 'Some Speculations Concerning the Process Leading to the Formation of the Image on the Shroud of Turin', publication: 'Previously Unpublished', year: 1985, pdfUrl: 'https://www.shroud.com/pdfs/lukasik1985.pdf', category: 'UNPUBLISHED', notes: 'By the VP of Northrop Corp and former ARPA director' }
 ];
+
+// Official STURP Conclusions - Source: https://www.shroud.com/78conclu.htm
+export const STURP_CONCLUSIONS: STURPOfficialSummary = {
+  releaseDate: 'October 1981',
+  author: 'John Heller',
+  url: 'https://www.shroud.com/78conclu.htm',
+  fullText: `No pigments, paints, dyes or stains have been found on the fibrils. X-ray, fluorescence and microchemistry on the fibrils preclude the possibility of paint being used as a method for creating the image. Ultra Violet and infrared evaluation confirm these studies. Computer image enhancement and analysis by a device known as a VP-8 image analyzer show that the image has unique, three-dimensional information encoded in it. Microchemical evaluation has indicated no evidence of any spices, oils, or any biochemicals known to be produced by the body in life or in death. It is clear that there has been a direct contact of the Shroud with a body, which explains certain features such as scourge marks, as well as the blood. However, while this type of contact might explain some of the features of the torso, it is totally incapable of explaining the image of the face with the high resolution that has been amply demonstrated by photography.
+
+The basic problem from a scientific point of view is that some explanations which might be tenable from a chemical point of view, are precluded by physics. Contrariwise, certain physical explanations which may be attractive are completely precluded by the chemistry. For an adequate explanation for the image of the Shroud, one must have an explanation which is scientifically sound, from a physical, chemical, biological and medical viewpoint. At the present, this type of solution does not appear to be obtainable by the best efforts of the members of the Shroud Team. Furthermore, experiments in physics and chemistry with old linen have failed to reproduce adequately the phenomenon presented by the Shroud of Turin. The scientific consensus is that the image was produced by something which resulted in oxidation, dehydration and conjugation of the polysaccharide structure of the microfibrils of the linen itself. Such changes can be duplicated in the laboratory by certain chemical and physical processes. A similar type of change in linen can be obtained by sulfuric acid or heat. However, there are no chemical or physical methods known which can account for the totality of the image, nor can any combination of physical, chemical, biological or medical circumstances explain the image adequately.
+
+Thus, the answer to the question of how the image was produced or what produced the image remains, now, as it has in the past, a mystery.
+
+We can conclude for now that the Shroud image is that of a real human form of a scourged, crucified man. It is not the product of an artist. The blood stains are composed of hemoglobin and also give a positive test for serum albumin. The image is an ongoing mystery and until further chemical studies are made, perhaps by this group of scientists, or perhaps by some scientists in the future, the problem remains unsolved.`,
+  keyFindings: [
+    {
+      id: 'conc_no_pigments',
+      finding: 'No pigments, paints, dyes or stains found on the fibrils',
+      category: 'NEGATIVE',
+      details: 'X-ray, fluorescence and microchemistry preclude the possibility of paint being used as a method for creating the image.'
+    },
+    {
+      id: 'conc_uv_ir',
+      finding: 'UV and infrared evaluation confirm no artistic media',
+      category: 'NEGATIVE',
+      details: 'Multiple spectroscopic methods independently ruled out painting.'
+    },
+    {
+      id: 'conc_3d_info',
+      finding: 'Image contains unique three-dimensional information',
+      category: 'POSITIVE',
+      details: 'VP-8 image analyzer shows 3D data encoded in image intensity, unlike normal photographs or paintings.'
+    },
+    {
+      id: 'conc_no_biochem',
+      finding: 'No evidence of spices, oils, or biochemicals',
+      category: 'NEGATIVE',
+      details: 'Microchemical evaluation found no biochemicals known to be produced by the body in life or death.'
+    },
+    {
+      id: 'conc_body_contact',
+      finding: 'Direct contact with a body confirmed',
+      category: 'POSITIVE',
+      details: 'Explains scourge marks and blood, but contact alone cannot explain the facial image resolution.'
+    },
+    {
+      id: 'conc_physics_chemistry',
+      finding: 'Chemistry and physics mutually exclude each other\'s explanations',
+      category: 'MYSTERY',
+      details: 'Chemically tenable explanations are precluded by physics; physically attractive explanations are precluded by chemistry.'
+    },
+    {
+      id: 'conc_oxidation',
+      finding: 'Image formed by oxidation, dehydration and conjugation of cellulose',
+      category: 'POSITIVE',
+      details: 'The polysaccharide structure of the microfibrils was chemically altered, similar to acid or heat damage.'
+    },
+    {
+      id: 'conc_no_replication',
+      finding: 'No known method can reproduce the totality of the image',
+      category: 'MYSTERY',
+      details: 'Experiments with old linen have failed to adequately reproduce the phenomenon.'
+    },
+    {
+      id: 'conc_real_human',
+      finding: 'Image is of a real human form of a scourged, crucified man',
+      category: 'POSITIVE',
+      details: 'Not the product of an artist.'
+    },
+    {
+      id: 'conc_blood_verified',
+      finding: 'Blood stains contain hemoglobin and serum albumin',
+      category: 'POSITIVE',
+      details: 'Positive tests confirm real blood components, not paint.'
+    },
+    {
+      id: 'conc_mystery',
+      finding: 'Image formation remains a mystery',
+      category: 'MYSTERY',
+      details: 'The answer to how the image was produced remains unsolved.'
+    }
+  ]
+};

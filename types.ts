@@ -64,3 +64,18 @@ export interface STURPPaper {
   category: 'REFEREED' | 'OTHER' | 'FOLLOW_UP' | 'UNPUBLISHED' | 'PROCEEDINGS';
   notes?: string;
 }
+
+export interface STURPConclusion {
+  id: string;
+  finding: string;
+  category: 'NEGATIVE' | 'POSITIVE' | 'MYSTERY';
+  details?: string;
+}
+
+export interface STURPOfficialSummary {
+  releaseDate: string;
+  author: string;
+  url: string;
+  fullText: string;
+  keyFindings: STURPConclusion[];
+}

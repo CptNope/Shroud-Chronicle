@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { LensMode, STURPPaper } from '../types';
-import { Library, Link as LinkIcon, ExternalLink, Book, FileText, ChevronDown, ChevronUp, Download } from 'lucide-react';
-import { STURP_PAPERS } from '../constants';
+import { Library, Link as LinkIcon, ExternalLink, Book, FileText, ChevronDown, ChevronUp, Download, ClipboardCheck, XCircle, HelpCircle, CheckCircle2 } from 'lucide-react';
+import { STURP_PAPERS, STURP_CONCLUSIONS } from '../constants';
 
 interface ReferencesProps {
   lens: LensMode;
@@ -181,10 +181,131 @@ export const References: React.FC<ReferencesProps> = ({ lens }) => {
         ))}
       </div>
 
+      {/* STURP Conclusions Section */}
+      <div className="mt-12 border-t border-neutral-800 pt-8">
+        <STURPConclusionsSection />
+      </div>
+
       {/* STURP Papers Section */}
       <div className="mt-12 border-t border-neutral-800 pt-8">
         <STURPPapersSection />
       </div>
+    </div>
+  );
+};
+
+// STURP Conclusions Component
+const STURPConclusionsSection: React.FC = () => {
+  const [showFullText, setShowFullText] = useState(false);
+
+  const getCategoryIcon = (category: 'NEGATIVE' | 'POSITIVE' | 'MYSTERY') => {
+    switch (category) {
+      case 'NEGATIVE':
+        return <XCircle size={14} className="text-red-400" />;
+      case 'POSITIVE':
+        return <CheckCircle2 size={14} className="text-green-400" />;
+      case 'MYSTERY':
+        return <HelpCircle size={14} className="text-amber-400" />;
+    }
+  };
+
+  const getCategoryColor = (category: 'NEGATIVE' | 'POSITIVE' | 'MYSTERY') => {
+    switch (category) {
+      case 'NEGATIVE':
+        return 'border-l-red-500/50 bg-red-500/5';
+      case 'POSITIVE':
+        return 'border-l-green-500/50 bg-green-500/5';
+      case 'MYSTERY':
+        return 'border-l-amber-500/50 bg-amber-500/5';
+    }
+  };
+
+  const negativeFindings = STURP_CONCLUSIONS.keyFindings.filter(f => f.category === 'NEGATIVE');
+  const positiveFindings = STURP_CONCLUSIONS.keyFindings.filter(f => f.category === 'POSITIVE');
+  const mysteryFindings = STURP_CONCLUSIONS.keyFindings.filter(f => f.category === 'MYSTERY');
+
+  return (
+    <div>
+      <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-3">
+        <ClipboardCheck className="text-green-500" />
+        Official STURP Conclusions (1981)
+      </h3>
+      <p className="text-neutral-400 text-sm mb-4">
+        Written by Dr. John Heller after STURP's final meeting. Released at the October 1981 press conference.
+        <a
+          href={STURP_CONCLUSIONS.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="ml-2 text-amber-500 hover:text-amber-400 inline-flex items-center gap-1"
+        >
+          View original <ExternalLink size={12} />
+        </a>
+      </p>
+
+      {/* Key Findings Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div className="bg-neutral-900/50 rounded-lg border border-neutral-800 p-4">
+          <h4 className="text-red-400 font-medium text-sm mb-3 flex items-center gap-2">
+            <XCircle size={16} /> What Was NOT Found
+          </h4>
+          <ul className="space-y-2">
+            {negativeFindings.map((f) => (
+              <li key={f.id} className={`text-xs p-2 rounded border-l-2 ${getCategoryColor(f.category)}`}>
+                <p className="text-neutral-200">{f.finding}</p>
+                {f.details && <p className="text-neutral-500 mt-1">{f.details}</p>}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="bg-neutral-900/50 rounded-lg border border-neutral-800 p-4">
+          <h4 className="text-green-400 font-medium text-sm mb-3 flex items-center gap-2">
+            <CheckCircle2 size={16} /> What WAS Found
+          </h4>
+          <ul className="space-y-2">
+            {positiveFindings.map((f) => (
+              <li key={f.id} className={`text-xs p-2 rounded border-l-2 ${getCategoryColor(f.category)}`}>
+                <p className="text-neutral-200">{f.finding}</p>
+                {f.details && <p className="text-neutral-500 mt-1">{f.details}</p>}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="bg-neutral-900/50 rounded-lg border border-neutral-800 p-4">
+          <h4 className="text-amber-400 font-medium text-sm mb-3 flex items-center gap-2">
+            <HelpCircle size={16} /> The Mystery
+          </h4>
+          <ul className="space-y-2">
+            {mysteryFindings.map((f) => (
+              <li key={f.id} className={`text-xs p-2 rounded border-l-2 ${getCategoryColor(f.category)}`}>
+                <p className="text-neutral-200">{f.finding}</p>
+                {f.details && <p className="text-neutral-500 mt-1">{f.details}</p>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* Full Text Toggle */}
+      <button
+        onClick={() => setShowFullText(!showFullText)}
+        className="text-sm text-neutral-400 hover:text-white flex items-center gap-2 mb-3"
+      >
+        {showFullText ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+        {showFullText ? 'Hide' : 'Show'} full original text
+      </button>
+
+      {showFullText && (
+        <div className="bg-neutral-900/70 rounded-lg border border-neutral-700 p-6">
+          <p className="text-neutral-300 text-sm leading-relaxed whitespace-pre-line italic">
+            "{STURP_CONCLUSIONS.fullText}"
+          </p>
+          <p className="text-neutral-500 text-xs mt-4">
+            — Dr. John Heller, {STURP_CONCLUSIONS.releaseDate}
+          </p>
+        </div>
+      )}
     </div>
   );
 };
