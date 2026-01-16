@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { LensMode, STURPPaper } from '../types';
-import { Library, Link as LinkIcon, ExternalLink, Book, FileText, ChevronDown, ChevronUp, Download, ClipboardCheck, XCircle, HelpCircle, CheckCircle2 } from 'lucide-react';
-import { STURP_PAPERS, STURP_CONCLUSIONS } from '../constants';
+import { Library, Link as LinkIcon, ExternalLink, Book, FileText, ChevronDown, ChevronUp, Download, ClipboardCheck, XCircle, HelpCircle, CheckCircle2, Users, Calendar, MapPin, Clock, DollarSign } from 'lucide-react';
+import { STURP_PAPERS, STURP_CONCLUSIONS, STURP_TEAM, STURP_HISTORY } from '../constants';
 
 interface ReferencesProps {
   lens: LensMode;
@@ -186,6 +186,11 @@ export const References: React.FC<ReferencesProps> = ({ lens }) => {
         <STURPConclusionsSection />
       </div>
 
+      {/* STURP Team Section */}
+      <div className="mt-12 border-t border-neutral-800 pt-8">
+        <STURPTeamSection />
+      </div>
+
       {/* STURP Papers Section */}
       <div className="mt-12 border-t border-neutral-800 pt-8">
         <STURPPapersSection />
@@ -306,6 +311,101 @@ const STURPConclusionsSection: React.FC = () => {
           </p>
         </div>
       )}
+    </div>
+  );
+};
+
+// STURP Team Component
+const STURPTeamSection: React.FC = () => {
+  const [showAllMembers, setShowAllMembers] = useState(false);
+  
+  const turinMembers = STURP_TEAM.filter(m => m.inTurin1978);
+  const otherMembers = STURP_TEAM.filter(m => !m.inTurin1978);
+  const displayMembers = showAllMembers ? STURP_TEAM : turinMembers.slice(0, 12);
+
+  return (
+    <div>
+      <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-3">
+        <Users className="text-blue-500" />
+        STURP Team ({STURP_TEAM.length} Scientists)
+      </h3>
+      
+      {/* History Facts */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+        <div className="bg-neutral-900/50 rounded-lg border border-neutral-800 p-3">
+          <div className="flex items-center gap-2 text-neutral-500 text-xs mb-1">
+            <Calendar size={12} /> First Meeting
+          </div>
+          <p className="text-neutral-200 text-sm font-medium">{STURP_HISTORY.firstMeetingDate}</p>
+          <p className="text-neutral-500 text-xs">{STURP_HISTORY.firstMeetingLocation}</p>
+        </div>
+        <div className="bg-neutral-900/50 rounded-lg border border-neutral-800 p-3">
+          <div className="flex items-center gap-2 text-neutral-500 text-xs mb-1">
+            <Clock size={12} /> Examination
+          </div>
+          <p className="text-neutral-200 text-sm font-medium">{STURP_HISTORY.examinationDate}</p>
+          <p className="text-neutral-500 text-xs">{STURP_HISTORY.examinationDuration}</p>
+        </div>
+        <div className="bg-neutral-900/50 rounded-lg border border-neutral-800 p-3">
+          <div className="flex items-center gap-2 text-neutral-500 text-xs mb-1">
+            <DollarSign size={12} /> Equipment
+          </div>
+          <p className="text-neutral-200 text-sm font-medium">{STURP_HISTORY.equipmentValue}</p>
+        </div>
+        <div className="bg-neutral-900/50 rounded-lg border border-neutral-800 p-3">
+          <div className="flex items-center gap-2 text-neutral-500 text-xs mb-1">
+            <MapPin size={12} /> Exposition
+          </div>
+          <p className="text-neutral-200 text-sm font-medium">{STURP_HISTORY.totalVisitors}</p>
+        </div>
+      </div>
+
+      <p className="text-neutral-400 text-sm mb-4">
+        Self-funded scientists from national labs, universities, and corporations. No official sponsorship.
+        <a
+          href={STURP_HISTORY.wikiUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="ml-2 text-amber-500 hover:text-amber-400 inline-flex items-center gap-1"
+        >
+          Wikipedia <ExternalLink size={12} />
+        </a>
+      </p>
+
+      {/* Team Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mb-4">
+        {displayMembers.map((member, idx) => (
+          <div 
+            key={idx} 
+            className={`text-xs p-2 rounded border-l-2 ${
+              member.inTurin1978 
+                ? 'border-l-green-500/50 bg-green-500/5' 
+                : 'border-l-blue-500/50 bg-blue-500/5'
+            }`}
+          >
+            <p className="text-neutral-200 font-medium">{member.name}</p>
+            <p className="text-neutral-500">{member.role}</p>
+            <p className="text-neutral-600">{member.affiliation}</p>
+          </div>
+        ))}
+      </div>
+
+      <button
+        onClick={() => setShowAllMembers(!showAllMembers)}
+        className="text-sm text-neutral-400 hover:text-white flex items-center gap-2"
+      >
+        {showAllMembers ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+        {showAllMembers ? 'Show fewer' : `Show all ${STURP_TEAM.length} team members`}
+      </button>
+
+      <div className="mt-3 flex gap-4 text-xs text-neutral-500">
+        <span className="flex items-center gap-1">
+          <span className="w-2 h-2 rounded-full bg-green-500/50"></span> In Turin 1978 ({turinMembers.length})
+        </span>
+        <span className="flex items-center gap-1">
+          <span className="w-2 h-2 rounded-full bg-blue-500/50"></span> Research Support ({otherMembers.length})
+        </span>
+      </div>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { TimelineEvent, LabModule, ViralClaim, ArtifactHotspot, STURPPaper, STURPOfficialSummary } from './types';
+import { TimelineEvent, LabModule, ViralClaim, ArtifactHotspot, STURPPaper, STURPOfficialSummary, STURPMember, STURPHistory } from './types';
 
 export const APP_VERSION = '1.1.0';
 
@@ -1280,3 +1280,53 @@ We can conclude for now that the Shroud image is that of a real human form of a 
     }
   ]
 };
+
+// STURP History - Source: https://en.wikipedia.org/wiki/Shroud_of_Turin_Research_Project
+export const STURP_HISTORY: STURPHistory = {
+  foundingYear: 1976,
+  firstMeetingDate: 'March 1977',
+  firstMeetingLocation: 'Albuquerque, New Mexico',
+  examinationDate: 'October 8-13, 1978',
+  examinationDuration: '120 hours (5 days around the clock)',
+  equipmentValue: 'Over $2 million (donated/loaned)',
+  finalReportYear: 1981,
+  totalVisitors: '~3 million visitors during public exposition',
+  wikiUrl: 'https://en.wikipedia.org/wiki/Shroud_of_Turin_Research_Project'
+};
+
+// STURP Team Members - Source: https://en.wikipedia.org/wiki/Shroud_of_Turin_Research_Project
+export const STURP_TEAM: STURPMember[] = [
+  { name: 'John P. Jackson', affiliation: 'U.S. Air Force Academy', role: 'Co-founder, Physicist', inTurin1978: true, wikiUrl: 'https://en.wikipedia.org/wiki/U.S._Air_Force_Academy' },
+  { name: 'Eric J. Jumper', affiliation: 'U.S. Air Force Academy', role: 'Co-founder, Thermodynamicist', inTurin1978: true },
+  { name: 'Robert W. Mottern', affiliation: 'Sandia Laboratories', role: 'Co-founder, Radiographer', inTurin1978: true, wikiUrl: 'https://en.wikipedia.org/wiki/Sandia_Laboratories' },
+  { name: 'Thomas F. D\'Muhala', affiliation: 'Nuclear Technology Corporation', role: 'Team Leader, Logistics', inTurin1978: true },
+  { name: 'Raymond N. Rogers', affiliation: 'Los Alamos National Laboratory', role: 'Thermal Chemist', inTurin1978: true, wikiUrl: 'https://en.wikipedia.org/wiki/Raymond_Rogers' },
+  { name: 'John Heller', affiliation: 'New England Institute', role: 'Biophysicist', inTurin1978: false },
+  { name: 'Alan Adler', affiliation: 'Western Connecticut State University', role: 'Blood Chemist', inTurin1978: false, wikiUrl: 'https://en.wikipedia.org/wiki/Western_Connecticut_State_University' },
+  { name: 'Barrie M. Schwortz', affiliation: 'Barrie Schwortz Studios', role: 'Documenting Photographer', inTurin1978: true },
+  { name: 'Vernon D. Miller', affiliation: 'Brooks Institute of Photography', role: 'Photographer', inTurin1978: true, wikiUrl: 'https://en.wikipedia.org/wiki/Brooks_Institute_of_Photography' },
+  { name: 'Samuel Pellicori', affiliation: 'Santa Barbara Research Center', role: 'Optical Physicist', inTurin1978: true },
+  { name: 'Donald J. Lynn', affiliation: 'Jet Propulsion Laboratory', role: 'Image Processing', inTurin1978: true, wikiUrl: 'https://en.wikipedia.org/wiki/Jet_Propulsion_Laboratory' },
+  { name: 'Jean Lorre', affiliation: 'Jet Propulsion Laboratory', role: 'Image Processing', inTurin1978: true },
+  { name: 'Robert Bucklin', affiliation: 'Harris County Medical Examiner\'s Office', role: 'Forensic Pathologist', inTurin1978: true },
+  { name: 'Joseph S. Accetta', affiliation: 'Lockheed Corporation', role: 'Infrared Spectroscopy', inTurin1978: true, wikiUrl: 'https://en.wikipedia.org/wiki/Lockheed_Corporation' },
+  { name: 'Steven Baumgart', affiliation: 'Air Force Weapons Laboratory', role: 'Thermography', inTurin1978: true, wikiUrl: 'https://en.wikipedia.org/wiki/Air_Force_Weapons_Laboratory' },
+  { name: 'Ernest H. Brooks II', affiliation: 'Brooks Institute of Photography', role: 'Photography', inTurin1978: true },
+  { name: 'Donald Devan', affiliation: 'Oceanographic Services Inc.', role: 'Analysis', inTurin1978: true },
+  { name: 'Robert Dinegar', affiliation: 'Los Alamos National Laboratory', role: 'Chemistry', inTurin1978: true },
+  { name: 'Rudolph J. Dichtl', affiliation: 'University of Colorado', role: 'Electric Power', inTurin1978: true, wikiUrl: 'https://en.wikipedia.org/wiki/University_of_Colorado' },
+  { name: 'Jim Drusik', affiliation: 'Natural History Museum of Los Angeles County', role: 'Conservation', inTurin1978: false, wikiUrl: 'https://en.wikipedia.org/wiki/Natural_History_Museum_of_Los_Angeles_County' },
+  { name: 'Mark Evans', affiliation: 'Brooks Institute of Photography', role: 'Photography', inTurin1978: true },
+  { name: 'Joseph M. Gambescia Sr.', affiliation: 'St. Agnes Medical Center', role: 'Medical Analysis', inTurin1978: false },
+  { name: 'John D. German', affiliation: 'Air Force Weapons Laboratory', role: 'Electric Power', inTurin1978: true },
+  { name: 'Roger Gilbert', affiliation: 'Oriel Corporation', role: 'Spectroscopy', inTurin1978: true },
+  { name: 'Marty Gilbert', affiliation: 'Oriel Corporation', role: 'Spectroscopy', inTurin1978: true },
+  { name: 'Thomas Haverty', affiliation: 'Rocky Mountain Thermograph', role: 'Thermography', inTurin1978: true },
+  { name: 'Donald Janney', affiliation: 'Los Alamos National Laboratory', role: 'Analysis', inTurin1978: true },
+  { name: 'Joan Janney', affiliation: 'Los Alamos National Laboratory', role: 'Analysis', inTurin1978: true },
+  { name: 'J. Ronald London', affiliation: 'Los Alamos National Laboratory', role: 'X-Ray Analysis', inTurin1978: true },
+  { name: 'Roger A. Morris', affiliation: 'Los Alamos National Laboratory', role: 'X-Ray Fluorescence', inTurin1978: true },
+  { name: 'Larry Schwalbe', affiliation: 'Los Alamos National Laboratory', role: 'Physics', inTurin1978: false },
+  { name: 'Diane Soran', affiliation: 'Los Alamos National Laboratory', role: 'Analysis', inTurin1978: false },
+  { name: 'Kenneth E. Stevenson', affiliation: 'IBM', role: 'Documentation', inTurin1978: true, wikiUrl: 'https://en.wikipedia.org/wiki/IBM' }
+];

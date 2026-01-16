@@ -79,3 +79,23 @@ export interface STURPOfficialSummary {
   fullText: string;
   keyFindings: STURPConclusion[];
 }
+
+export interface STURPMember {
+  name: string;
+  affiliation: string;
+  role?: string;
+  inTurin1978: boolean;
+  wikiUrl?: string;
+}
+
+export interface STURPHistory {
+  foundingYear: number;
+  firstMeetingDate: string;
+  firstMeetingLocation: string;
+  examinationDate: string;
+  examinationDuration: string;
+  equipmentValue: string;
+  finalReportYear: number;
+  totalVisitors: string;
+  wikiUrl: string;
+}
