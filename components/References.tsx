@@ -1,6 +1,7 @@
-import React from 'react';
-import { LensMode } from '../types';
-import { Library, Link as LinkIcon, ExternalLink, Book, FileText } from 'lucide-react';
+import React, { useState } from 'react';
+import { LensMode, STURPPaper } from '../types';
+import { Library, Link as LinkIcon, ExternalLink, Book, FileText, ChevronDown, ChevronUp, Download } from 'lucide-react';
+import { STURP_PAPERS } from '../constants';
 
 interface ReferencesProps {
   lens: LensMode;
@@ -178,6 +179,103 @@ export const References: React.FC<ReferencesProps> = ({ lens }) => {
             </ul>
           </div>
         ))}
+      </div>
+
+      {/* STURP Papers Section */}
+      <div className="mt-12 border-t border-neutral-800 pt-8">
+        <STURPPapersSection />
+      </div>
+    </div>
+  );
+};
+
+// Category display names and colors
+const CATEGORY_INFO: Record<STURPPaper['category'], { label: string; color: string }> = {
+  REFEREED: { label: 'Peer-Reviewed Journal Papers', color: 'text-green-400' },
+  OTHER: { label: 'Other STURP Publications', color: 'text-blue-400' },
+  FOLLOW_UP: { label: 'Follow-up Research', color: 'text-purple-400' },
+  UNPUBLISHED: { label: 'Previously Unpublished', color: 'text-amber-400' },
+  PROCEEDINGS: { label: 'Conference Proceedings', color: 'text-cyan-400' }
+};
+
+const STURPPapersSection: React.FC = () => {
+  const [expandedCategory, setExpandedCategory] = useState<STURPPaper['category'] | null>('REFEREED');
+
+  const categories: STURPPaper['category'][] = ['REFEREED', 'OTHER', 'FOLLOW_UP', 'UNPUBLISHED', 'PROCEEDINGS'];
+
+  const papersByCategory = categories.reduce((acc, cat) => {
+    acc[cat] = STURP_PAPERS.filter(p => p.category === cat);
+    return acc;
+  }, {} as Record<STURPPaper['category'], STURPPaper[]>);
+
+  return (
+    <div>
+      <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-3">
+        <FileText className="text-amber-500" />
+        STURP Published Papers
+      </h3>
+      <p className="text-neutral-400 text-sm mb-6">
+        40 scientific papers from the 1978 Shroud of Turin Research Project. PDFs are cached offline after first view.
+      </p>
+
+      <div className="space-y-3">
+        {categories.map((category) => {
+          const papers = papersByCategory[category];
+          const isExpanded = expandedCategory === category;
+          const { label, color } = CATEGORY_INFO[category];
+
+          return (
+            <div key={category} className="bg-neutral-900/50 rounded-lg border border-neutral-800 overflow-hidden">
+              <button
+                onClick={() => setExpandedCategory(isExpanded ? null : category)}
+                className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-neutral-800/50 transition-colors"
+              >
+                <span className={`font-medium ${color}`}>
+                  {label} <span className="text-neutral-500 font-normal">({papers.length})</span>
+                </span>
+                {isExpanded ? <ChevronUp size={18} className="text-neutral-500" /> : <ChevronDown size={18} className="text-neutral-500" />}
+              </button>
+
+              {isExpanded && (
+                <div className="px-4 pb-4 space-y-3">
+                  {papers.map((paper) => (
+                    <div key={paper.id} className="border-t border-neutral-800 pt-3 first:border-t-0 first:pt-0">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm text-neutral-200 font-medium">{paper.title}</p>
+                          <p className="text-xs text-neutral-500 mt-1">{paper.authors} • {paper.year}</p>
+                          <p className="text-xs text-neutral-600 mt-0.5">{paper.publication}</p>
+                          {paper.notes && <p className="text-xs text-amber-600/70 mt-1 italic">{paper.notes}</p>}
+                        </div>
+                        <div className="flex-shrink-0">
+                          {paper.pdfUrl ? (
+                            <a
+                              href={paper.pdfUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 px-2 py-1 bg-amber-500/10 text-amber-500 text-xs rounded hover:bg-amber-500/20 transition-colors"
+                            >
+                              <Download size={12} /> PDF
+                            </a>
+                          ) : paper.abstractUrl ? (
+                            <a
+                              href={paper.abstractUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 px-2 py-1 bg-blue-500/10 text-blue-400 text-xs rounded hover:bg-blue-500/20 transition-colors"
+                            >
+                              <ExternalLink size={12} /> Abstract
+                            </a>
+                          ) : null}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

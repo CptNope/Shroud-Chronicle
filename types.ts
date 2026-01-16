@@ -17,6 +17,7 @@ export interface TimelineEvent {
   details?: string;
   labId?: string;
   url?: string;
+  paperRefs?: number[]; // References to STURP_PAPERS by id
 }
 
 export interface LabModule {
@@ -28,6 +29,7 @@ export interface LabModule {
   findings: string;
   lens: LensMode; // Which lens does this support primarily?
   url?: string;
+  paperRefs?: number[]; // References to STURP_PAPERS by id
 }
 
 export interface ViralClaim {
@@ -39,6 +41,7 @@ export interface ViralClaim {
   verdictText: string;
   url?: string;
   lens: LensMode; // The perspective that typically circulates this claim
+  paperRefs?: number[]; // References to STURP_PAPERS by id
 }
 
 export interface ArtifactHotspot {
@@ -48,4 +51,16 @@ export interface ArtifactHotspot {
   label: string;
   description: string;
   lens: LensMode | 'NEUTRAL';
+}
+
+export interface STURPPaper {
+  id: number;
+  authors: string;
+  title: string;
+  publication: string;
+  year: number;
+  pdfUrl?: string;
+  abstractUrl?: string;
+  category: 'REFEREED' | 'OTHER' | 'FOLLOW_UP' | 'UNPUBLISHED' | 'PROCEEDINGS';
+  notes?: string;
 }

@@ -13,6 +13,7 @@
 const CACHE_VERSION = '2.1.0';
 const CACHE_NAME = `shroud-chronicle-v${CACHE_VERSION}`;
 const IMAGE_CACHE_NAME = `shroud-images-v${CACHE_VERSION}`;
+const PDF_CACHE_NAME = `shroud-pdfs-v${CACHE_VERSION}`;
 
 // Precache local app shell files
 const PRECACHE_URLS = [
@@ -40,6 +41,13 @@ function isImageRequest(request) {
          url.includes('wikipedia.org') ||
          url.includes('picsum.photos') ||
          request.destination === 'image';
+}
+
+// Helper to check if request is for a PDF (STURP papers)
+function isPdfRequest(request) {
+  const url = request.url;
+  return url.match(/\.pdf(\?.*)?$/i) || 
+         url.includes('shroud.com/pdfs');
 }
 
 self.addEventListener('install', (event) => {
@@ -75,7 +83,7 @@ self.addEventListener('install', (event) => {
 
 // Clean up old caches when a new SW is activated
 self.addEventListener('activate', (event) => {
-  const currentCaches = [CACHE_NAME, IMAGE_CACHE_NAME];
+  const currentCaches = [CACHE_NAME, IMAGE_CACHE_NAME, PDF_CACHE_NAME];
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
@@ -131,7 +139,40 @@ self.addEventListener('fetch', (event) => {
     return;
   }
   
-  // Non-images: Stale-While-Revalidate strategy
+  // PDFs: Cache-first for offline access (lazy loading - only cache when viewed)
+  if (isPdfRequest(request)) {
+    event.respondWith(
+      caches.open(PDF_CACHE_NAME).then((cache) => {
+        return cache.match(request).then((cachedResponse) => {
+          if (cachedResponse) {
+            console.log('[SW] Serving cached PDF:', request.url.split('/').pop());
+            return cachedResponse;
+          }
+          
+          // Not in cache - fetch and cache for offline access
+          return fetch(request, { mode: 'cors' })
+            .then((networkResponse) => {
+              if (networkResponse && networkResponse.ok) {
+                cache.put(request, networkResponse.clone());
+                console.log('[SW] Cached PDF for offline:', request.url.split('/').pop());
+              }
+              return networkResponse;
+            })
+            .catch((err) => {
+              console.log('[SW] PDF fetch failed:', request.url);
+              return new Response('PDF not available offline. Please view it online first to cache it.', { 
+                status: 404, 
+                statusText: 'PDF not cached',
+                headers: { 'Content-Type': 'text/plain' }
+              });
+            });
+        });
+      })
+    );
+    return;
+  }
+  
+  // Non-images/PDFs: Stale-While-Revalidate strategy
   event.respondWith(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.match(request).then((response) => {
