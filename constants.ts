@@ -1,6 +1,6 @@
 import { TimelineEvent, LabModule, ViralClaim, ArtifactHotspot, STURPPaper, STURPOfficialSummary, STURPMember, STURPHistory, HistoricalImage, ScientificInstrument } from './types';
 
-export const APP_VERSION = '2.3.0';
+export const APP_VERSION = '2.4.0';
 
 export const EVENTS: TimelineEvent[] = [
   {

@@ -9,15 +9,16 @@ import { ArtGallery } from './components/ArtGallery';
 import { References } from './components/References';
 import { Donations } from './components/Donations';
 import { Legal } from './components/Legal';
+import { Share } from './components/Share';
 import { UpdateNotification } from './components/UpdateNotification';
 import { InstallPrompt } from './components/InstallPrompt';
 import { LensMode } from './types';
 import { APP_VERSION } from './constants';
-import { Activity, BookOpen, Fingerprint, ScanEye, Home as HomeIcon, Palette, Library, Heart, Scale } from 'lucide-react';
+import { Activity, BookOpen, Fingerprint, ScanEye, Home as HomeIcon, Palette, Library, Heart, Scale, Share2 } from 'lucide-react';
 
 const App = () => {
   const [mode, setMode] = useState<LensMode>('SKEPTIC');
-  const [view, setView] = useState<'HOME' | 'TIMELINE' | 'LABS' | 'VIRAL' | 'ARTIFACT' | 'GALLERY' | 'REFS' | 'DONATE' | 'LEGAL'>('HOME');
+  const [view, setView] = useState<'HOME' | 'TIMELINE' | 'LABS' | 'VIRAL' | 'ARTIFACT' | 'GALLERY' | 'REFS' | 'SHARE' | 'DONATE' | 'LEGAL'>('HOME');
 
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-200 selection:bg-neutral-700 font-sans">
@@ -77,6 +78,12 @@ const App = () => {
             <Library size={16} /> <span className="hidden lg:inline">Refs</span>
           </button>
           <button 
+            onClick={() => setView('SHARE')}
+            className={`flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg text-sm font-medium transition-all ${view === 'SHARE' ? 'bg-neutral-800 text-white shadow-sm' : 'text-neutral-500 hover:text-neutral-300'}`}
+          >
+            <Share2 size={16} /> <span className="hidden lg:inline">Share</span>
+          </button>
+          <button 
             onClick={() => setView('DONATE')}
             className={`flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg text-sm font-medium transition-all ml-2 ${view === 'DONATE' ? 'bg-red-900/30 text-red-400 border border-red-900/50' : 'text-neutral-500 hover:text-red-400 hover:bg-red-950/30'}`}
             title="Support Project"
@@ -87,7 +94,7 @@ const App = () => {
       </div>
 
       {/* Hero Section Content - Only show on Non-Home pages */}
-      {view !== 'HOME' && view !== 'DONATE' && view !== 'LEGAL' && (
+      {view !== 'HOME' && view !== 'DONATE' && view !== 'LEGAL' && view !== 'SHARE' && (
         <div className="text-center py-10 px-4 animate-in fade-in slide-in-from-bottom-2">
           <h1 className="text-3xl md:text-5xl font-black tracking-tight mb-2 text-white">SHROUD CHRONICLE</h1>
           <p className={`text-xs md:text-sm tracking-[0.2em] uppercase font-bold ${mode === 'BELIEVER' ? 'text-amber-500' : 'text-cyan-500'}`}>
@@ -105,6 +112,7 @@ const App = () => {
         {view === 'VIRAL' && <ViralCheck lens={mode} />}
         {view === 'GALLERY' && <ArtGallery lens={mode} />}
         {view === 'REFS' && <References lens={mode} />}
+        {view === 'SHARE' && <Share lens={mode} />}
         {view === 'DONATE' && <Donations lens={mode} />}
         {view === 'LEGAL' && <Legal onClose={() => setView('HOME')} />}
       </main>
