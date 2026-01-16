@@ -5,6 +5,77 @@ All notable changes to ShroudChronicle will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.0] - 2026-01-16
+
+### Added
+- **Share Tab** - New sharing page with:
+  - Pre-generated QR code for quick phone-to-phone sharing
+  - Copy URL button with clipboard integration
+  - Native Web Share API support on mobile devices
+  - Quick links to Live App, GitHub Repository, Documentation, and Issues
+  - Pre-written share message with copy functionality
+  - Lens-aware theming (amber/cyan)
+
+- **Install Prompt Component** (`InstallPrompt.tsx`)
+  - Captures `beforeinstallprompt` event for immediate install button display
+  - Shows styled banner 2 seconds after page load (bypasses engagement heuristics)
+  - Remembers user dismissal for 7 days via localStorage
+  - Auto-hides when app is already installed
+  - Native "Share via Device" button on supported platforms
+
+- **README Architecture Diagrams** (Mermaid)
+  - Application Component Structure diagram
+  - Dual-Lens Data Flow flowchart
+  - PWA Lifecycle sequence diagram (Install & Update flows)
+  - Service Worker Caching Strategy flowchart
+  - Data Model ER Diagram (Entity Relationships)
+
+### Changed
+- **PWA Manifest Improvements**
+  - Fixed icon paths for GitHub Pages deployment
+  - Added explicit `start_url: "./index.html"` and `scope: "./"` for Android compatibility
+  - Moved manifest to `public/` folder to avoid Vite hashing
+  - Added maskable icons (192x192, 512x512) for Android adaptive icons
+  - Added screenshots for richer install prompts
+  - Added shortcuts for Timeline, Labs, and Claims quick access
+
+- **QR Code** - Changed from dynamic API generation to static pre-generated asset for reliability
+
+### Fixed
+- PWA installability on Windows Chrome (manifest path issue)
+- PWA installability on Android (start_url and scope compatibility)
+- Service Worker update notification now properly triggers on new versions
+
+---
+
+## [2.0.0] - 2026-01-16
+
+### Added
+- **Home Page Enhanced Introduction**
+  - Universal introduction section with Wikipedia-sourced content about the Shroud of Turin
+  - Physical description: 4.4 × 1.1 metre linen cloth with faint straw-yellow image
+  - Historical context: Turin since 1578, 1532 fire damage, documented history from 1354
+  - 1988 radiocarbon dating mention with contested status note
+  - Perspective-specific content follows the universal intro
+
+- **PWA Cross-Platform Installability**
+  - Full manifest.json with all required fields for Android, Windows, macOS, Linux
+  - Service Worker with proper fetch handler for PWA criteria
+  - Update notification component (`UpdateNotification.tsx`) for version prompts
+  - Periodic update checks (every 60 seconds + on visibility change)
+
+- **`public/` Folder Structure**
+  - PWA assets properly organized for Vite static file handling
+  - Icons folder with all required sizes (48x48 to 512x512)
+  - Maskable icons for Android adaptive icon support
+  - Placeholder screenshots for install prompts
+
+### Changed
+- Service Worker version management system with clear update instructions
+- Cache versioning tied to app version for proper cache invalidation
+
+---
+
 ## [1.1.0] - 2026-01-15
 
 ### Added
