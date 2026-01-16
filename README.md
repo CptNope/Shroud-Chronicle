@@ -7,8 +7,232 @@ Unlike traditional resources that often bias heavily toward either religious dev
 ### 🔗 Live Demo: [https://cptnope.github.io/Shroud-Chronicle/](https://cptnope.github.io/Shroud-Chronicle/)
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-1.1.0-green.svg)
+![Version](https://img.shields.io/badge/version-2.3.0-green.svg)
 ![PWA](https://img.shields.io/badge/PWA-Offline%20Ready-orange.svg)
+
+---
+
+## 📊 Architecture & Logic Diagrams
+
+### Application Component Structure
+
+```mermaid
+graph TB
+    subgraph App["🏠 App.tsx"]
+        LensState["useState: mode<br/>(SKEPTIC | BELIEVER)"]
+        ViewState["useState: view<br/>(HOME | TIMELINE | LABS | ...)"]
+    end
+
+    subgraph Components["📦 View Components"]
+        Home["Home.tsx"]
+        Timeline["Timeline.tsx"]
+        Labs["ForensicLabs.tsx"]
+        Artifact["ArtifactViewer.tsx"]
+        Viral["ViralCheck.tsx"]
+        Gallery["ArtGallery.tsx"]
+        Refs["References.tsx"]
+    end
+
+    subgraph SharedUI["🎨 Shared UI"]
+        LensToggle["LensToggle.tsx<br/>(Header)"]
+        UpdateNotif["UpdateNotification.tsx"]
+        InstallPrompt["InstallPrompt.tsx"]
+    end
+
+    subgraph Data["📄 Data Layer"]
+        Constants["constants.ts<br/>(EVENTS, LABS, CLAIMS)"]
+        Types["types.ts<br/>(TypeScript interfaces)"]
+    end
+
+    App --> LensToggle
+    App --> UpdateNotif
+    App --> InstallPrompt
+    ViewState --> Components
+    LensState --> Components
+    Components --> Constants
+    Components --> Types
+```
+
+### Dual-Lens Data Flow
+
+```mermaid
+flowchart LR
+    subgraph Input["👤 User Action"]
+        Toggle["Toggle Lens Switch"]
+    end
+
+    subgraph State["⚡ React State"]
+        Mode["LensMode<br/>SKEPTIC ↔ BELIEVER"]
+    end
+
+    subgraph Transform["🔄 Data Transformation"]
+        Filter["Filter by lens consensus"]
+        Style["Apply lens-specific styling"]
+        Content["Select lens-specific text"]
+    end
+
+    subgraph Output["📱 UI Rendering"]
+        Timeline["Timeline Events<br/>(highlighted/dimmed)"]
+        Labs["Lab Modules<br/>(different interpretations)"]
+        Hotspots["Artifact Hotspots<br/>(different annotations)"]
+        Verdicts["Claim Verdicts<br/>(lens-aware ratings)"]
+    end
+
+    Toggle --> Mode
+    Mode --> Filter
+    Mode --> Style
+    Mode --> Content
+    Filter --> Timeline
+    Filter --> Labs
+    Style --> Timeline
+    Style --> Labs
+    Content --> Hotspots
+    Content --> Verdicts
+```
+
+### PWA Lifecycle (Install & Update)
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Browser
+    participant App
+    participant SW as Service Worker
+    participant Cache
+
+    Note over User,Cache: 🔽 First Visit / Install Flow
+    User->>Browser: Visit site
+    Browser->>App: Load index.html
+    App->>SW: Register sw.js
+    SW->>Cache: Precache app shell + icons
+    Browser->>App: Fire 'beforeinstallprompt'
+    App->>User: Show InstallPrompt banner
+    User->>Browser: Click "Install App"
+    Browser->>User: App installed to device
+
+    Note over User,Cache: 🔄 Update Flow
+    User->>Browser: Return to app
+    Browser->>SW: Check for new sw.js
+    SW-->>Browser: New version found
+    SW->>SW: Install new SW (waiting)
+    Browser->>App: Fire 'updatefound'
+    App->>User: Show UpdateNotification
+    User->>App: Click "Refresh"
+    App->>SW: postMessage('SKIP_WAITING')
+    SW->>SW: Activate new version
+    Browser->>User: Page reloads with update
+```
+
+### Service Worker Caching Strategy
+
+```mermaid
+flowchart TD
+    subgraph Request["📥 Incoming Request"]
+        Fetch["fetch event"]
+    end
+
+    subgraph Check["🔍 Request Type Check"]
+        IsImage{"Is Image?<br/>.jpg/.png/wikimedia"}
+        IsPDF{"Is PDF?<br/>.pdf/shroud.com"}
+        IsOther["Other Resource"]
+    end
+
+    subgraph ImageStrategy["🖼️ Image Strategy<br/>(Cache-First + Background Update)"]
+        ImgCache["Check image cache"]
+        ImgHit["Return cached image"]
+        ImgUpdate["Update cache in background"]
+        ImgMiss["Fetch from network"]
+        ImgStore["Store in cache"]
+    end
+
+    subgraph PDFStrategy["📄 PDF Strategy<br/>(Cache-First, Lazy Load)"]
+        PDFCache["Check PDF cache"]
+        PDFHit["Return cached PDF"]
+        PDFMiss["Fetch from network"]
+        PDFStore["Store in cache"]
+    end
+
+    subgraph OtherStrategy["📦 App Shell Strategy<br/>(Stale-While-Revalidate)"]
+        AppCache["Check app cache"]
+        AppReturn["Return cached + fetch update"]
+        AppFetch["Fetch if not cached"]
+    end
+
+    Fetch --> IsImage
+    IsImage -->|Yes| ImgCache
+    IsImage -->|No| IsPDF
+    IsPDF -->|Yes| PDFCache
+    IsPDF -->|No| IsOther
+
+    ImgCache -->|Hit| ImgHit
+    ImgHit --> ImgUpdate
+    ImgCache -->|Miss| ImgMiss
+    ImgMiss --> ImgStore
+
+    PDFCache -->|Hit| PDFHit
+    PDFCache -->|Miss| PDFMiss
+    PDFMiss --> PDFStore
+
+    IsOther --> AppCache
+    AppCache --> AppReturn
+    AppCache -->|Miss| AppFetch
+```
+
+### Data Model Relationships
+
+```mermaid
+erDiagram
+    TIMELINE_EVENT {
+        string id PK
+        number year
+        string title
+        string description
+        string category
+        string consensus
+        string[] paperRefs FK
+    }
+    
+    LAB_MODULE {
+        string id PK
+        string title
+        string methodology
+        object skepticView
+        object believerView
+        string[] paperRefs FK
+    }
+    
+    VIRAL_CLAIM {
+        string id PK
+        string claim
+        string verdict
+        object skepticAnalysis
+        object believerAnalysis
+        string[] paperRefs FK
+    }
+    
+    STURP_PAPER {
+        string id PK
+        string title
+        string authors
+        string pdfUrl
+        number year
+    }
+    
+    ARTIFACT_HOTSPOT {
+        string id PK
+        string label
+        number x
+        number y
+        string skepticNote
+        string believerNote
+    }
+
+    TIMELINE_EVENT ||--o{ STURP_PAPER : "references"
+    LAB_MODULE ||--o{ STURP_PAPER : "references"
+    VIRAL_CLAIM ||--o{ STURP_PAPER : "references"
+```
+
+---
 
 ## 🌟 Key Features
 
