@@ -1,4 +1,4 @@
-import { TimelineEvent, LabModule, ViralClaim, ArtifactHotspot, STURPPaper, STURPOfficialSummary, STURPMember, STURPHistory } from './types';
+import { TimelineEvent, LabModule, ViralClaim, ArtifactHotspot, STURPPaper, STURPOfficialSummary, STURPMember, STURPHistory, HistoricalImage } from './types';
 
 export const APP_VERSION = '1.1.0';
 
@@ -186,7 +186,7 @@ export const EVENTS: TimelineEvent[] = [
     description: 'Secondo Pia\'s photograph reveals the image is a perfect negative.',
     category: 'SCIENCE',
     consensus: 'AUTHENTIC_FAVORED',
-    imageUrl: 'https://picsum.photos/800/600?grayscale',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Secundo_Pia_Turinske_platno_1898.jpg/250px-Secundo_Pia_Turinske_platno_1898.jpg',
     url: 'https://www.shroud.com/history.htm',
   },
   {
@@ -1329,4 +1329,21 @@ export const STURP_TEAM: STURPMember[] = [
   { name: 'Larry Schwalbe', affiliation: 'Los Alamos National Laboratory', role: 'Physics', inTurin1978: false },
   { name: 'Diane Soran', affiliation: 'Los Alamos National Laboratory', role: 'Analysis', inTurin1978: false },
   { name: 'Kenneth E. Stevenson', affiliation: 'IBM', role: 'Documentation', inTurin1978: true, wikiUrl: 'https://en.wikipedia.org/wiki/IBM' }
+];
+
+// Historical Images with Attribution - For fair use/public domain display
+export const HISTORICAL_IMAGES: HistoricalImage[] = [
+  {
+    id: 'img_pia_1898',
+    title: 'First Photograph of the Shroud (1898)',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/c/c3/Secundo_Pia_Turinske_platno_1898.jpg',
+    thumbnailUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Secundo_Pia_Turinske_platno_1898.jpg/250px-Secundo_Pia_Turinske_platno_1898.jpg',
+    author: 'Secondo Pia',
+    date: 'May 28, 1898',
+    license: 'PUBLIC_DOMAIN',
+    source: 'Wikimedia Commons',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Secundo_Pia_Turinske_platno_1898.jpg',
+    description: 'The first photograph of the Shroud of Turin by Secondo Pia. The negative revealed lifelike details, sparking scientific interest.',
+    eventRef: 'evt_1898'
+  }
 ];

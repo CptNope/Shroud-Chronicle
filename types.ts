@@ -99,3 +99,17 @@ export interface STURPHistory {
   totalVisitors: string;
   wikiUrl: string;
 }
+
+export interface HistoricalImage {
+  id: string;
+  title: string;
+  imageUrl: string;
+  thumbnailUrl?: string;
+  author: string;
+  date: string;
+  license: 'PUBLIC_DOMAIN' | 'CC_BY' | 'CC_BY_SA' | 'FAIR_USE';
+  source: string;
+  sourceUrl: string;
+  description: string;
+  eventRef?: string; // Links to TimelineEvent id
+}
