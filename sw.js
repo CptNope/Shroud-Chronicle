@@ -1,15 +1,27 @@
-// Service Worker Version: v1.3.0
-// Increment this version comment to trigger a browser update on the client side.
+// ============================================
+// Service Worker Version Management
+// ============================================
+// VERSION: 2.0.0
+// UPDATED: 2026-01-15
+// 
+// To trigger client updates:
+// 1. Increment the VERSION above
+// 2. Update CACHE_VERSION below (match VERSION)
+// 3. Deploy - clients will auto-update
+// ============================================
 
-const CACHE_NAME = 'shroud-chronicle-v1-3';
+const CACHE_VERSION = '2.0.0';
+const CACHE_NAME = `shroud-chronicle-v${CACHE_VERSION}`;
 
-// CRITICAL FIX: Only pre-cache local app shell files.
-// External URLs (CDNs) caused CORS errors during the 'install' phase on GitHub Pages.
-// These will now be cached dynamically at runtime (lazy caching) via the fetch listener below.
+// Precache local app shell files only
+// External URLs (CDNs) are cached dynamically via fetch listener
 const PRECACHE_URLS = [
   './',
   './index.html',
-  './manifest.json'
+  './manifest.json',
+  './icons/icon-192x192.png',
+  './icons/icon-512x512.png',
+  './icons/apple-touch-icon.png'
 ];
 
 self.addEventListener('install', (event) => {
