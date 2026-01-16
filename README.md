@@ -87,6 +87,10 @@ Data utilized in this application is aggregated from peer-reviewed papers and hi
 *   **STURP Final Report (1981)**
 *   **McCrone Research Institute Findings**
 
+## 📝 Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for a detailed history of changes and new features.
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
