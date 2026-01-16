@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.1.0] - 2026-01-15
 
 ### Added
+- **VP-8 Image Analyzer Documentation**
+  - Scientific instrument data with full technical description
+  - Link to 1977 VP-8 brochure/manual PDF
+  - Quote from inventor Pete Schumacher about the Shroud's unique 3D properties
+  - Source: [Wikipedia - VP8 Image Analyzer](https://en.wikipedia.org/wiki/VP8_Image_Analyzer)
+
 - **STURP Papers Integration**: 40 scientific papers from the 1978 Shroud of Turin Research Project
   - Papers categorized as: Peer-Reviewed, Other Publications, Follow-up Research, Unpublished, Proceedings
   - Direct PDF links to shroud.com archive

@@ -1,4 +1,4 @@
-import { TimelineEvent, LabModule, ViralClaim, ArtifactHotspot, STURPPaper, STURPOfficialSummary, STURPMember, STURPHistory, HistoricalImage } from './types';
+import { TimelineEvent, LabModule, ViralClaim, ArtifactHotspot, STURPPaper, STURPOfficialSummary, STURPMember, STURPHistory, HistoricalImage, ScientificInstrument } from './types';
 
 export const APP_VERSION = '1.1.0';
 
@@ -1345,5 +1345,26 @@ export const HISTORICAL_IMAGES: HistoricalImage[] = [
     sourceUrl: 'https://commons.wikimedia.org/wiki/File:Secundo_Pia_Turinske_platno_1898.jpg',
     description: 'The first photograph of the Shroud of Turin by Secondo Pia. The negative revealed lifelike details, sparking scientific interest.',
     eventRef: 'evt_1898'
+  }
+];
+
+// Scientific Instruments - Key devices used in Shroud research
+export const SCIENTIFIC_INSTRUMENTS: ScientificInstrument[] = [
+  {
+    id: 'inst_vp8',
+    name: 'VP-8 Image Analyzer',
+    manufacturer: 'Interpretation Systems Incorporated (ISI)',
+    inventor: 'Pete Schumacher',
+    year: 1972,
+    type: 'Analog Computer / Isometric Projection Device',
+    description: 'The VP-8 Image Analyzer is an analog computer that converts image brightness values into vertical relief, creating a 3D topographic representation. White areas appear higher in elevation, black areas appear lower, and mid-range grays appear between. Originally developed for aerial reconnaissance and satellite imagery analysis.',
+    shroudSignificance: 'When applied to normal photographs or paintings, the VP-8 produces distorted, inaccurate representations because shading in art does not correlate to actual distance. However, when applied to the Shroud image, it produced an anatomically accurate 3D relief of a human figure—the only known image in history to do so. This discovery in 1976 by John Jackson and Eric Jumper directly led to the formation of STURP.',
+    quote: {
+      text: 'I had never heard of the Shroud of Turin before that moment. I had no idea what I was looking at. However, the results are unlike anything I have processed through the VP-8 Analyzer, before or since. Only the Shroud of Turin has produced these results from a VP-8 Image Analyzer isometric projection study.',
+      author: 'Pete Schumacher, inventor of the VP-8'
+    },
+    wikiUrl: 'https://en.wikipedia.org/wiki/VP8_Image_Analyzer',
+    manualUrl: 'https://www.dropbox.com/scl/fi/l1ucff8nuih9ygpp7p1us/1977-08-VP8ImageAnalyzerBrochure.pdf?rlkey=nchsh0r6v7r6t7odfqq6sdifi&dl=0',
+    relatedPapers: [8, 9]
   }
 ];

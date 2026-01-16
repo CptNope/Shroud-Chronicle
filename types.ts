@@ -113,3 +113,18 @@ export interface HistoricalImage {
   description: string;
   eventRef?: string; // Links to TimelineEvent id
 }
+
+export interface ScientificInstrument {
+  id: string;
+  name: string;
+  manufacturer: string;
+  inventor?: string;
+  year: number;
+  type: string;
+  description: string;
+  shroudSignificance: string;
+  quote?: { text: string; author: string };
+  wikiUrl?: string;
+  manualUrl?: string;
+  relatedPapers?: number[]; // References to STURP_PAPERS by id
+}
