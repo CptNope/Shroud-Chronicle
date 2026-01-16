@@ -36,8 +36,8 @@ export const Share: React.FC<ShareProps> = ({ lens }) => {
     }
   };
 
-  // QR Code API URL (using qrserver.com - free, no API key needed)
-  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(APP_URL)}&bgcolor=1a1a1a&color=ffffff&margin=10`;
+  // Static QR code asset (pre-generated for reliability)
+  const qrCodeUrl = 'icons/qr-code.png';
 
   const links = [
     {

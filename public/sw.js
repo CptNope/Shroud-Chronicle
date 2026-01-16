@@ -1,7 +1,7 @@
 // ============================================
 // Service Worker Version Management
 // ============================================
-// VERSION: 2.4.0
+// VERSION: 2.5.0
 // UPDATED: 2026-01-16
 // 
 // To trigger client updates:
@@ -10,7 +10,7 @@
 // 3. Deploy - clients will auto-update
 // ============================================
 
-const CACHE_VERSION = '2.4.0';
+const CACHE_VERSION = '2.5.0';
 const CACHE_NAME = `shroud-chronicle-v${CACHE_VERSION}`;
 const IMAGE_CACHE_NAME = `shroud-images-v${CACHE_VERSION}`;
 const PDF_CACHE_NAME = `shroud-pdfs-v${CACHE_VERSION}`;

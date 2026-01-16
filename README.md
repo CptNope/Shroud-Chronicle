@@ -7,7 +7,7 @@ Unlike traditional resources that often bias heavily toward either religious dev
 ### 🔗 Live Demo: [https://cptnope.github.io/Shroud-Chronicle/](https://cptnope.github.io/Shroud-Chronicle/)
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-2.4.0-green.svg)
+![Version](https://img.shields.io/badge/version-2.5.0-green.svg)
 ![PWA](https://img.shields.io/badge/PWA-Offline%20Ready-orange.svg)
 
 ---
