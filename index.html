@@ -30,7 +30,17 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./icons/icon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./icons/icon-16x16.png">
     <link rel="icon" type="image/svg+xml" href="./icons/icon.svg">
-
+    
+    <!-- Windows Tiles -->
+    <meta name="msapplication-TileColor" content="#0a0a0a">
+    <meta name="msapplication-TileImage" content="./icons/icon-144x144.png">
+    <meta name="msapplication-config" content="none">
+    
+    <!-- Android/Chrome -->
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+    <link rel="mask-icon" href="./icons/icon.svg" color="#f59e0b">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       // Configure Tailwind to support dark mode manually if needed
@@ -80,30 +90,64 @@
     <!-- App Entry Point -->
     <script type="module" src="./index.tsx"></script>
 
-    <!-- Service Worker Registration -->
+    <!-- Service Worker Registration with Auto-Update Detection -->
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('./sw.js').then((registration) => {
-            console.log('SW registered: ', registration);
+            console.log('[PWA] Service Worker registered');
+            
+            // Check for updates immediately on page load
+            registration.update();
+            
+            // Periodic update check every 60 seconds (catches updates while app is open)
+            setInterval(() => {
+              registration.update();
+              console.log('[PWA] Checking for updates...');
+            }, 60 * 1000);
+            
+            // Also check for updates when page becomes visible again (user returns to tab)
+            document.addEventListener('visibilitychange', () => {
+              if (document.visibilityState === 'visible') {
+                registration.update();
+              }
+            });
+            
+            // Listen for new service worker installing
             registration.addEventListener('updatefound', () => {
               const newWorker = registration.installing;
+              console.log('[PWA] New version downloading...');
+              
               newWorker.addEventListener('statechange', () => {
-                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  window.dispatchEvent(new CustomEvent('swUpdated', { detail: registration }));
+                if (newWorker.state === 'installed') {
+                  if (navigator.serviceWorker.controller) {
+                    // New update available - notify user
+                    console.log('[PWA] New version ready - prompting user');
+                    window.dispatchEvent(new CustomEvent('swUpdated', { detail: registration }));
+                  } else {
+                    // First install - content cached for offline
+                    console.log('[PWA] Content cached for offline use');
+                  }
                 }
               });
             });
+            
+            // If there's already a waiting worker, notify immediately
+            if (registration.waiting) {
+              window.dispatchEvent(new CustomEvent('swUpdated', { detail: registration }));
+            }
+            
           }).catch((registrationError) => {
-            console.log('SW registration failed: ', registrationError);
+            console.log('[PWA] Registration failed:', registrationError);
           });
         });
 
-        let refreshing;
+        // Handle controller change (when user clicks refresh in UpdateNotification)
+        let refreshing = false;
         navigator.serviceWorker.addEventListener('controllerchange', () => {
           if (!refreshing) {
-            window.location.reload();
             refreshing = true;
+            window.location.reload();
           }
         });
       }

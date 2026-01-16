@@ -25,11 +25,13 @@ const PRECACHE_URLS = [
 ];
 
 self.addEventListener('install', (event) => {
-  // skipWaiting ensures the new SW takes over immediately, fixing stuck caches
-  self.skipWaiting(); 
+  // DO NOT call skipWaiting here - let the user decide when to update
+  // The UpdateNotification component will send SKIP_WAITING message when user clicks refresh
+  console.log(`[SW] Installing version ${CACHE_VERSION}`);
   
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
+      console.log(`[SW] Caching app shell for version ${CACHE_VERSION}`);
       return cache.addAll(PRECACHE_URLS);
     })
   );
