@@ -10,6 +10,7 @@ import { References } from './components/References';
 import { Donations } from './components/Donations';
 import { Legal } from './components/Legal';
 import { UpdateNotification } from './components/UpdateNotification';
+import { InstallPrompt } from './components/InstallPrompt';
 import { LensMode } from './types';
 import { APP_VERSION } from './constants';
 import { Activity, BookOpen, Fingerprint, ScanEye, Home as HomeIcon, Palette, Library, Heart, Scale } from 'lucide-react';
@@ -23,6 +24,9 @@ const App = () => {
       
       {/* Service Worker Update Prompt */}
       <UpdateNotification />
+      
+      {/* PWA Install Prompt (Android/Desktop) */}
+      <InstallPrompt />
 
       {/* Sticky Header with Lens Toggle */}
       <LensToggle mode={mode} setMode={setMode} />
