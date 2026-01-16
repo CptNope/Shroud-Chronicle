@@ -505,7 +505,7 @@ export const ArtifactViewer: React.FC<ArtifactViewerProps> = ({ lens }) => {
             </div>
           </div>
           <p className="text-center text-neutral-500 text-xs mt-4 font-mono">
-            The full cloth displays the ventral (left) and dorsal (right) images head-to-head. Active filter applied from main controls.
+            The full cloth displays the ventral (top) and dorsal (bottom) images head-to-head. Active filter applied from main controls.
           </p>
        </div>
 
