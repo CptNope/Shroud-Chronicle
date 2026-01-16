@@ -70,8 +70,8 @@
       "purpose": "maskable"
     }
   ],
-  "start_url": ".",
-  "scope": ".",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui", "window-controls-overlay"],
   "theme_color": "#0a0a0a",
