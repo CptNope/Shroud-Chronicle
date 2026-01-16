@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.1.0] - 2026-01-15
 
 ### Added
+- **Legal & Accessibility Pages**
+  - Terms of Service
+  - Privacy Policy (no data collection)
+  - Fair Use & Copyright Policy with DMCA takedown instructions via GitHub
+  - WCAG 2.1 Level AA Accessibility Statement
+  - Footer links to all legal pages
+
 - **VP-8 Image Analyzer Documentation**
   - Scientific instrument data with full technical description
   - Link to 1977 VP-8 brochure/manual PDF

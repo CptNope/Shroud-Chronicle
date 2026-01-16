@@ -8,14 +8,15 @@ import { Home } from './components/Home';
 import { ArtGallery } from './components/ArtGallery';
 import { References } from './components/References';
 import { Donations } from './components/Donations';
+import { Legal } from './components/Legal';
 import { UpdateNotification } from './components/UpdateNotification';
 import { LensMode } from './types';
 import { APP_VERSION } from './constants';
-import { Activity, BookOpen, Fingerprint, ScanEye, Home as HomeIcon, Palette, Library, Heart } from 'lucide-react';
+import { Activity, BookOpen, Fingerprint, ScanEye, Home as HomeIcon, Palette, Library, Heart, Scale } from 'lucide-react';
 
 const App = () => {
   const [mode, setMode] = useState<LensMode>('SKEPTIC');
-  const [view, setView] = useState<'HOME' | 'TIMELINE' | 'LABS' | 'VIRAL' | 'ARTIFACT' | 'GALLERY' | 'REFS' | 'DONATE'>('HOME');
+  const [view, setView] = useState<'HOME' | 'TIMELINE' | 'LABS' | 'VIRAL' | 'ARTIFACT' | 'GALLERY' | 'REFS' | 'DONATE' | 'LEGAL'>('HOME');
 
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-200 selection:bg-neutral-700 font-sans">
@@ -82,7 +83,7 @@ const App = () => {
       </div>
 
       {/* Hero Section Content - Only show on Non-Home pages */}
-      {view !== 'HOME' && view !== 'DONATE' && (
+      {view !== 'HOME' && view !== 'DONATE' && view !== 'LEGAL' && (
         <div className="text-center py-10 px-4 animate-in fade-in slide-in-from-bottom-2">
           <h1 className="text-3xl md:text-5xl font-black tracking-tight mb-2 text-white">SHROUD CHRONICLE</h1>
           <p className={`text-xs md:text-sm tracking-[0.2em] uppercase font-bold ${mode === 'BELIEVER' ? 'text-amber-500' : 'text-cyan-500'}`}>
@@ -101,13 +102,46 @@ const App = () => {
         {view === 'GALLERY' && <ArtGallery lens={mode} />}
         {view === 'REFS' && <References lens={mode} />}
         {view === 'DONATE' && <Donations lens={mode} />}
+        {view === 'LEGAL' && <Legal onClose={() => setView('HOME')} />}
       </main>
 
       {/* Footer */}
       <footer className="border-t border-neutral-900 py-8 text-center text-neutral-600 text-xs">
         <p>ShroudChronicle PWA v{APP_VERSION} • Offline-First Design</p>
         <p className="mt-2 opacity-50">Based on Technical Design Document v1.0</p>
-        <button onClick={() => setView('DONATE')} className="mt-4 hover:text-neutral-400 transition-colors">
+        
+        {/* Legal Links */}
+        <nav className="mt-4 flex flex-wrap justify-center gap-4" aria-label="Legal">
+          <button 
+            onClick={() => setView('LEGAL')} 
+            className="hover:text-neutral-400 transition-colors focus:outline-none focus:underline"
+          >
+            Terms of Service
+          </button>
+          <span aria-hidden="true">•</span>
+          <button 
+            onClick={() => setView('LEGAL')} 
+            className="hover:text-neutral-400 transition-colors focus:outline-none focus:underline"
+          >
+            Privacy Policy
+          </button>
+          <span aria-hidden="true">•</span>
+          <button 
+            onClick={() => setView('LEGAL')} 
+            className="hover:text-neutral-400 transition-colors focus:outline-none focus:underline"
+          >
+            Copyright & Fair Use
+          </button>
+          <span aria-hidden="true">•</span>
+          <button 
+            onClick={() => setView('LEGAL')} 
+            className="hover:text-neutral-400 transition-colors focus:outline-none focus:underline"
+          >
+            Accessibility
+          </button>
+        </nav>
+
+        <button onClick={() => setView('DONATE')} className="mt-4 hover:text-neutral-400 transition-colors block mx-auto">
           Contribute to the Archive
         </button>
       </footer>
