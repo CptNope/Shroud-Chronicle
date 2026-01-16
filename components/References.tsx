@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { LensMode, STURPPaper } from '../types';
-import { Library, Link as LinkIcon, ExternalLink, Book, FileText, ChevronDown, ChevronUp, Download, ClipboardCheck, XCircle, HelpCircle, CheckCircle2, Users, Calendar, MapPin, Clock, DollarSign } from 'lucide-react';
-import { STURP_PAPERS, STURP_CONCLUSIONS, STURP_TEAM, STURP_HISTORY } from '../constants';
+import { Library, Link as LinkIcon, ExternalLink, Book, FileText, ChevronDown, ChevronUp, Download, ClipboardCheck, XCircle, HelpCircle, CheckCircle2, Users, Calendar, MapPin, Clock, DollarSign, Cpu, Quote } from 'lucide-react';
+import { STURP_PAPERS, STURP_CONCLUSIONS, STURP_TEAM, STURP_HISTORY, SCIENTIFIC_INSTRUMENTS } from '../constants';
 
 interface ReferencesProps {
   lens: LensMode;
@@ -189,6 +189,11 @@ export const References: React.FC<ReferencesProps> = ({ lens }) => {
       {/* STURP Team Section */}
       <div className="mt-12 border-t border-neutral-800 pt-8">
         <STURPTeamSection />
+      </div>
+
+      {/* Scientific Instruments Section */}
+      <div className="mt-12 border-t border-neutral-800 pt-8">
+        <ScientificInstrumentsSection />
       </div>
 
       {/* STURP Papers Section */}
@@ -405,6 +410,93 @@ const STURPTeamSection: React.FC = () => {
         <span className="flex items-center gap-1">
           <span className="w-2 h-2 rounded-full bg-blue-500/50"></span> Research Support ({otherMembers.length})
         </span>
+      </div>
+    </div>
+  );
+};
+
+// Scientific Instruments Component
+const ScientificInstrumentsSection: React.FC = () => {
+  const vp8 = SCIENTIFIC_INSTRUMENTS.find(i => i.id === 'inst_vp8');
+
+  if (!vp8) return null;
+
+  return (
+    <div>
+      <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-3">
+        <Cpu className="text-purple-500" />
+        Scientific Instruments
+      </h3>
+      <p className="text-neutral-400 text-sm mb-6">
+        Key devices used in Shroud research that produced groundbreaking discoveries.
+      </p>
+
+      {/* VP-8 Image Analyzer Card */}
+      <div className="bg-neutral-900/50 rounded-xl border border-neutral-800 p-6">
+        <div className="flex flex-col md:flex-row md:items-start gap-6">
+          <div className="flex-1">
+            <h4 className="text-lg font-bold text-white mb-1">{vp8.name}</h4>
+            <p className="text-neutral-500 text-sm mb-4">
+              {vp8.manufacturer} • Invented by {vp8.inventor} ({vp8.year})
+            </p>
+
+            <div className="space-y-4 text-sm text-neutral-300">
+              <div>
+                <h5 className="text-neutral-400 text-xs uppercase tracking-wide mb-1">What It Does</h5>
+                <p>{vp8.description}</p>
+              </div>
+
+              <div>
+                <h5 className="text-neutral-400 text-xs uppercase tracking-wide mb-1">Why It Matters</h5>
+                <p>{vp8.shroudSignificance}</p>
+              </div>
+            </div>
+
+            {/* Quote */}
+            {vp8.quote && (
+              <div className="mt-6 bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+                <Quote size={16} className="text-purple-400 mb-2" />
+                <p className="text-neutral-200 text-sm italic leading-relaxed">
+                  "{vp8.quote.text}"
+                </p>
+                <p className="text-purple-400 text-xs mt-2">— {vp8.quote.author}</p>
+              </div>
+            )}
+
+            {/* Links */}
+            <div className="mt-6 flex flex-wrap gap-3">
+              {vp8.wikiUrl && (
+                <a
+                  href={vp8.wikiUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-200 text-sm rounded-lg transition-colors"
+                >
+                  <ExternalLink size={14} /> Wikipedia
+                </a>
+              )}
+              {vp8.manualUrl && (
+                <a
+                  href={vp8.manualUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 text-sm rounded-lg transition-colors"
+                >
+                  <Download size={14} /> 1977 VP-8 Brochure (PDF)
+                </a>
+              )}
+            </div>
+
+            {/* Related Papers */}
+            {vp8.relatedPapers && vp8.relatedPapers.length > 0 && (
+              <div className="mt-4">
+                <p className="text-neutral-500 text-xs">
+                  Related STURP Papers: #{vp8.relatedPapers.join(', #')} (see below)
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
