@@ -35,6 +35,17 @@ export const Home: React.FC<HomeProps> = ({ lens, setView }) => {
           </h1>
 
           <div className="text-lg text-neutral-300 leading-relaxed max-w-2xl mb-8 space-y-5">
+            {/* Universal Introduction */}
+            <div className="text-base text-neutral-400 border-b border-neutral-700/50 pb-4 mb-4">
+              <p className="mb-3">
+                <strong className="text-white">The Shroud of Turin</strong> (<em>Italian: Sindone di Torino</em>) is a 4.4 × 1.1 metre (14'5" × 3'7") length of linen cloth bearing a faint, straw-yellow image of the front and back of a naked man. The image—visible more clearly as a photographic negative—depicts a bearded, muscular figure approximately 1.75m (5'9") tall with wounds consistent with Roman crucifixion: scourge marks, puncture wounds around the head, a lance wound in the side, and nail wounds in the wrists and feet.
+              </p>
+              <p>
+                The cloth has been kept in Turin, Italy since 1578, now housed in the Chapel of the Holy Shroud within Turin Cathedral. It was damaged by fire in 1532 in Chambéry, France, leaving burn marks and patches. Its documented history begins in 1354 when it was exhibited in Lirey, France. In 1988, radiocarbon dating by three independent laboratories dated the linen to 1260–1390 AD—though this result remains contested by some researchers.
+              </p>
+            </div>
+
+            {/* Perspective-specific content */}
             <p>
               {isBeliever 
                 ? "You are examining the Shroud as a potential Relic of the Resurrection. This lens prioritizes forensic anomalies that defy medieval artistic capabilities: the presence of human blood (Type AB) with high bilirubin, unique 3D distance information encoded in the image intensity, and pollen grains specific to the Jerusalem area."

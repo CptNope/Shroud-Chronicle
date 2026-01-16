@@ -1,0 +1,141 @@
+{
+  "short_name": "ShroudChronicle",
+  "name": "The Shroud Chronicle",
+  "description": "Explore the history, science, and mystery of the Shroud of Turin through dual lenses of faith and science. A comprehensive PWA featuring an interactive timeline, forensic lab data, and viral claim verification.",
+  "icons": [
+    {
+      "src": "./icons/icon-48x48.png",
+      "type": "image/png",
+      "sizes": "48x48",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-72x72.png",
+      "type": "image/png",
+      "sizes": "72x72",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-96x96.png",
+      "type": "image/png",
+      "sizes": "96x96",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-128x128.png",
+      "type": "image/png",
+      "sizes": "128x128",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-144x144.png",
+      "type": "image/png",
+      "sizes": "144x144",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-152x152.png",
+      "type": "image/png",
+      "sizes": "152x152",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-384x384.png",
+      "type": "image/png",
+      "sizes": "384x384",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/maskable-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icons/maskable-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "window-controls-overlay"],
+  "theme_color": "#0a0a0a",
+  "background_color": "#0a0a0a",
+  "orientation": "any",
+  "categories": ["education", "lifestyle", "books"],
+  "lang": "en-US",
+  "dir": "ltr",
+  "id": "shroud-chronicle-pwa",
+  "prefer_related_applications": false,
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "screenshots": [
+    {
+      "src": "./icons/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Home page showing the Shroud Chronicle app"
+    },
+    {
+      "src": "./icons/screenshot-narrow.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mobile view of the Shroud Chronicle app"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Timeline",
+      "short_name": "Timeline",
+      "description": "View the interactive historical timeline",
+      "url": "./?view=timeline",
+      "icons": [{ "src": "./icons/icon-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Forensic Labs",
+      "short_name": "Labs",
+      "description": "Explore scientific analysis data",
+      "url": "./?view=labs",
+      "icons": [{ "src": "./icons/icon-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Viral Claims",
+      "short_name": "Claims",
+      "description": "Fact-check popular claims about the Shroud",
+      "url": "./?view=viral",
+      "icons": [{ "src": "./icons/icon-96x96.png", "sizes": "96x96" }]
+    }
+  ],
+  "related_applications": [],
+  "handle_links": "preferred",
+  "share_target": {
+    "action": "./",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
+}
