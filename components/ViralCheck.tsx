@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { AlertTriangle, CheckCircle, HelpCircle, UserX, ExternalLink, XCircle, Search, ArrowRight } from 'lucide-react';
-import { VIRAL_CLAIMS } from '../constants';
+import { AlertTriangle, CheckCircle, HelpCircle, UserX, ExternalLink, XCircle, Search, ArrowRight, FileText } from 'lucide-react';
+import { VIRAL_CLAIMS, STURP_PAPERS } from '../constants';
 import { VerdictType, LensMode } from '../types';
 
 interface ViralCheckProps {
@@ -119,6 +119,34 @@ export const ViralCheck: React.FC<ViralCheckProps> = ({ lens }) => {
                        >
                          <ExternalLink size={12} /> View Source Material
                        </a>
+                    </div>
+                  )}
+
+                  {claim.paperRefs && claim.paperRefs.length > 0 && (
+                    <div className="mt-3 pt-3 border-t border-neutral-800">
+                      <div className="flex items-center gap-1 mb-2">
+                        <FileText size={12} className="text-neutral-500" />
+                        <span className="text-[10px] uppercase tracking-wider text-neutral-500">STURP Papers</span>
+                      </div>
+                      <div className="flex flex-wrap gap-1">
+                        {claim.paperRefs.map(id => {
+                          const paper = STURP_PAPERS.find(p => p.id === id);
+                          if (!paper) return null;
+                          const url = paper.pdfUrl || paper.abstractUrl;
+                          return url ? (
+                            <a
+                              key={id}
+                              href={url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-[10px] px-2 py-0.5 rounded border border-neutral-700 text-neutral-400 hover:bg-neutral-800 transition-colors"
+                              title={paper.title}
+                            >
+                              #{id}
+                            </a>
+                          ) : null;
+                        })}
+                      </div>
                     </div>
                   )}
                 </div>

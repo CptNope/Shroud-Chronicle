@@ -241,6 +241,7 @@ export const EVENTS: TimelineEvent[] = [
     consensus: 'AUTHENTIC_FAVORED',
     details: 'This discovery directly led to the formation of the STURP team.',
     url: 'https://www.shroud.com/history.htm',
+    paperRefs: [8, 9],
   },
   {
     id: 'evt_1978',
@@ -252,6 +253,7 @@ export const EVENTS: TimelineEvent[] = [
     consensus: 'AUTHENTIC_FAVORED',
     labId: 'LAB_STURP',
     url: 'https://www.shroud.com/sturp.htm',
+    paperRefs: [1, 5, 10, 14, 15, 16, 19, 20],
   },
   {
     id: 'evt_1981',
@@ -263,6 +265,7 @@ export const EVENTS: TimelineEvent[] = [
     consensus: 'AUTHENTIC_FAVORED',
     details: 'Concluded that no known chemical or artistic method could account for the image.',
     url: 'https://www.shroud.com/78conclu.htm',
+    paperRefs: [6, 7, 12, 19],
   },
   {
     id: 'evt_1983',
@@ -461,7 +464,8 @@ export const LABS: LabModule[] = [
     methodology: 'X-Ray Fluorescence, VP-8 Analyzer, Tape Lifts',
     findings: 'Image is superficial (0.2 microns). No pigments. Contains 3D distance information.',
     lens: 'BELIEVER',
-    url: 'https://www.shroud.com/sturp.htm'
+    url: 'https://www.shroud.com/sturp.htm',
+    paperRefs: [1, 5, 8, 10, 14, 15, 16, 19, 20]
   },
   {
     id: 'LAB_MCCRONE',
@@ -481,7 +485,8 @@ export const LABS: LabModule[] = [
     methodology: 'Chemical & Microspectrophotometric Analysis',
     findings: 'Confirmed presence of hemoglobin, albumin, and high bilirubin levels. No paint binder found.',
     lens: 'BELIEVER',
-    url: 'https://www.shroud.com/pdfs/heller1.pdf'
+    url: 'https://www.shroud.com/pdfs/heller1.pdf',
+    paperRefs: [6, 7, 12]
   },
   {
     id: 'LAB_OXFORD',
@@ -501,7 +506,8 @@ export const LABS: LabModule[] = [
     methodology: 'Thermochimica Analysis',
     findings: 'Vanillin analysis shows C14 sample was chemically distinct (newer) than main cloth.',
     lens: 'BELIEVER',
-    url: 'https://www.shroud.com/pdfs/rogers2.pdf'
+    url: 'https://www.shroud.com/pdfs/rogers2.pdf',
+    paperRefs: [30]
   },
   {
     id: 'LAB_FREI',
@@ -564,7 +570,8 @@ export const VIRAL_CLAIMS: ViralClaim[] = [
     verdict: 'VERIFIED',
     verdictText: 'Verified by Forensic Chemistry',
     url: 'https://www.shroud.com/78conclu.htm',
-    lens: 'BELIEVER'
+    lens: 'BELIEVER',
+    paperRefs: [6, 7, 12]
   },
   {
     id: 'claim_twist',
@@ -612,7 +619,8 @@ export const VIRAL_CLAIMS: ViralClaim[] = [
     verdict: 'VERIFIED',
     verdictText: 'Verified Data / Interpretation Debated',
     url: 'https://www.shroud.com/history.htm#sturp',
-    lens: 'BELIEVER'
+    lens: 'BELIEVER',
+    paperRefs: [8, 9]
   },
   {
     id: 'claim_davinci',
@@ -697,7 +705,8 @@ export const VIRAL_CLAIMS: ViralClaim[] = [
     verdict: 'PLAUSIBLE',
     verdictText: 'Chemically Plausible / Explains Color',
     url: 'https://www.shroud.com/pdfs/rogers2.pdf',
-    lens: 'BELIEVER'
+    lens: 'BELIEVER',
+    paperRefs: [30]
   },
   {
     id: 'claim_dematerialization',
@@ -706,7 +715,8 @@ export const VIRAL_CLAIMS: ViralClaim[] = [
     description: 'The theory that the body became mechanically transparent (dematerialized), causing the cloth to collapse *through* the body while emitting radiation. This explains why the side images are not distorted laterally.',
     verdict: 'UNVERIFIED',
     verdictText: 'Physically Theoretical / Untestable',
-    lens: 'BELIEVER'
+    lens: 'BELIEVER',
+    paperRefs: [8, 9]
   },
   {
     id: 'claim_reweave',
@@ -1147,44 +1157,44 @@ export const ARTIFACT_HOTSPOTS: ArtifactHotspot[] = [
 
 // STURP Published Papers - Source: https://www.shroud.com/78papers.htm
 export const STURP_PAPERS: STURPPaper[] = [
-  { id: 1, authors: 'Accetta, J.S. and J.S. Baumgart', title: 'Infrared Reflectance Spectroscopy and Thermographic Investigations of the Shroud of Turin', publication: 'Applied Optics, Vol. 19, No. 12, pp. 1921-1929', year: 1980, pdfUrl: 'https://www.shroud.com/pdfs/accetta.pdf', category: 'REFEREED' },
-  { id: 2, authors: 'Avis, C., D. Lynn, J. Lorre, S. Lavoie, J. Clark, E. Armstrong, and J. Addington', title: 'Image Processing of the Shroud of Turin', publication: 'IEEE 1982 Proceedings of the International Conference on Cybernetics and Society, pp. 554-558', year: 1982, pdfUrl: 'https://www.shroud.com/pdfs/avis.pdf', category: 'REFEREED' },
-  { id: 3, authors: 'Devan, D. and V. Miller', title: 'Quantitative Photography of the Shroud of Turin', publication: 'IEEE 1982 Proceedings of the International Conference on Cybernetics and Society, pp. 548-553', year: 1982, pdfUrl: 'https://www.shroud.com/pdfs/devan.pdf', category: 'REFEREED' },
-  { id: 4, authors: 'Ercoline, W.R., R.C. Downs, Jr. and J.P. Jackson', title: 'Examination of the Turin Shroud for Image Distortions', publication: 'IEEE 1982 Proceedings of the International Conference on Cybernetics and Society, pp. 576-579', year: 1982, pdfUrl: 'https://www.shroud.com/pdfs/ercoline.pdf', category: 'REFEREED' },
-  { id: 5, authors: 'Gilbert, R., Jr. and M.M. Gilbert', title: 'Ultraviolet-Visible Reflectance and Fluorescence Spectra of the Shroud of Turin', publication: 'Applied Optics, Vol. 19, No. 12, pp. 1930-1936', year: 1980, pdfUrl: 'https://www.shroud.com/pdfs/gilbert.pdf', category: 'REFEREED' },
-  { id: 6, authors: 'Heller, J.H. and A.D. Adler', title: 'Blood on the Shroud of Turin', publication: 'Applied Optics, Vol. 19, No. 16, pp. 2742-2744', year: 1980, pdfUrl: 'https://www.shroud.com/pdfs/heller.pdf', category: 'REFEREED' },
-  { id: 7, authors: 'Heller, J.H. and A.D. Adler', title: 'A Chemical Investigation of the Shroud of Turin', publication: 'Canadian Society of Forensic Sciences Journal, Vol. 14, No. 3, pp. 81-103', year: 1981, pdfUrl: 'https://www.shroud.com/pdfs/chemical.pdf', category: 'REFEREED' },
-  { id: 8, authors: 'Jackson, J.P., E.J. Jumper and W.R. Ercoline', title: 'Three Dimensional Characteristic of the Shroud Image', publication: 'IEEE 1982 Proceedings of the International Conference on Cybernetics and Society, pp. 559-575', year: 1982, pdfUrl: 'https://www.shroud.com/pdfs/3d.pdf', category: 'REFEREED' },
-  { id: 9, authors: 'Jackson, J.P., E.J. Jumper, and W.R. Ercoline', title: 'Correlation of Image Intensity on the Turin Shroud with the 3-D Structure of a Human Body Shape', publication: 'Applied Optics, Vol. 23, No. 14, pp. 2244-2270', year: 1984, pdfUrl: 'https://www.shroud.com/pdfs/jackson.pdf', category: 'REFEREED' },
-  { id: 10, authors: 'Jumper, E.J. and R.W. Mottern', title: 'Scientific Investigation of the Shroud of Turin', publication: 'Applied Optics, Vol. 19, No. 12, pp. 1909-1912', year: 1980, pdfUrl: 'https://www.shroud.com/pdfs/jumper.pdf', category: 'REFEREED' },
-  { id: 11, authors: 'Jumper, E.J.', title: 'An Overview of the Testing Performed by the Shroud of Turin Research Project with a Summary of Results', publication: 'IEEE 1982 Proceedings of the International Conference on Cybernetics and Society, pp. 535-537', year: 1982, pdfUrl: 'https://www.shroud.com/pdfs/overview.pdf', category: 'REFEREED' },
-  { id: 12, authors: 'Jumper, E.J., A.D. Adler, J.P. Jackson, S.F. Pellicori, J.H. Heller and J.R. Drusik', title: 'A Comprehensive Examination of the Various Stains and Images on the Shroud of Turin', publication: 'Archaeological Chemistry III, ACS Advances in Chemistry No. 205, Chapter 22, pp. 447-476', year: 1984, pdfUrl: 'https://www.shroud.com/pdfs/stains.pdf', category: 'REFEREED' },
-  { id: 13, authors: 'Miller, V.D. and S.F. Pellicori', title: 'Ultraviolet Fluorescence Photography of the Shroud of Turin', publication: 'Journal of Biological Photography, Vol. 49, No. 3, pp. 71-85', year: 1981, pdfUrl: 'https://www.shroud.com/pdfs/uvfluor.pdf', category: 'REFEREED' },
-  { id: 14, authors: 'Morris, R.A., L.A. Schwalbe and J.R. London', title: 'X-Ray Fluorescence Investigation of the Shroud of Turin', publication: 'X-Ray Spectrometry, Vol. 9, No. 2, pp. 40-47', year: 1980, pdfUrl: 'https://www.shroud.com/pdfs/xray.pdf', category: 'REFEREED' },
-  { id: 15, authors: 'Mottern, R.W., R.J. London and R.A. Morris', title: 'Radiographic Examination of the Shroud of Turin - A Preliminary Report', publication: 'Materials Evaluation, Vol. 38, No. 12, pp. 39-44', year: 1980, pdfUrl: 'https://www.shroud.com/pdfs/radiograph.pdf', category: 'REFEREED' },
-  { id: 16, authors: 'Pellicori, S.F.', title: 'Spectral Properties of the Shroud of Turin', publication: 'Applied Optics, Vol. 19, No. 12, pp. 1913-1920', year: 1980, pdfUrl: 'https://www.shroud.com/pdfs/pellicori.pdf', category: 'REFEREED' },
-  { id: 17, authors: 'Pellicori, S. and M.S. Evans', title: 'The Shroud of Turin Through the Microscope', publication: 'Archaeology, January/February, pp. 34-43', year: 1981, pdfUrl: 'https://www.shroud.com/pdfs/microscope.pdf', category: 'REFEREED' },
-  { id: 18, authors: 'Pellicori, S.F. and R.A. Chandos', title: 'Portable Unit Permits UV/vis Study of Shroud', publication: 'Industrial Research and Development, February, pp. 186-189', year: 1981, pdfUrl: 'https://www.shroud.com/pdfs/portable.pdf', category: 'REFEREED' },
-  { id: 19, authors: 'Schwalbe, L.A. and R.N. Rogers', title: 'Physics and Chemistry of the Shroud of Turin, A Summary of the 1978 Investigation', publication: 'Analytica Chimica Acta, Vol. 135, pp. 3-49', year: 1982, pdfUrl: 'https://www.shroud.com/pdfs/schwalbe.pdf', category: 'REFEREED' },
-  { id: 20, authors: 'Schwortz, B.M.', title: 'Mapping of Research Test-Point Areas on the Shroud of Turin', publication: 'IEEE 1982 Proceedings of the International Conference on Cybernetics and Society, pp. 538-547', year: 1982, pdfUrl: 'https://www.shroud.com/pdfs/schwortz.pdf', category: 'REFEREED' },
-  { id: 21, authors: 'Bucklin, Robert', title: "The Shroud of Turin: A Pathologist's Viewpoint", publication: 'Legal Medicine Annual, pp. 33-39', year: 1982, pdfUrl: 'https://www.shroud.com/pdfs/bucklin.pdf', category: 'OTHER' },
-  { id: 22, authors: 'Dinegar, Robert Hudson', title: 'The Shroud of Turin - A Look at the Overall Picture', publication: 'The Living Church, May 17, pp. 9-11', year: 1981, pdfUrl: 'https://www.shroud.com/pdfs/dinegar.pdf', category: 'OTHER' },
-  { id: 23, authors: 'Jumper, E.J., K. Stevenson, Jr., and J.P. Jackson', title: 'Images of Coins on a Burial Cloth?', publication: 'The Numismatist, July, pp. 1349-1357', year: 1978, pdfUrl: 'https://www.shroud.com/pdfs/coins.pdf', category: 'OTHER' },
-  { id: 24, authors: 'Miller, V., and D. Lynn', title: 'De Lijwade Van Turjin', publication: 'Natuur en Techniek, February, pp. 102-125', year: 1981, pdfUrl: 'https://www.shroud.com/pdfs/lijwade.pdf', category: 'OTHER' },
-  { id: 25, authors: 'Jackson, J.P., E. Arthurs, L.A. Schwalbe, R.M. Sega, D.E. Windisch, W.H. Long, and E.A. Stappaerts', title: 'A New Tool for Cellulose Degradation Studies', publication: 'Materials Issues in Art and Archaeology: Symposium, Materials Research Society 123, pp. 311-316', year: 1988, pdfUrl: 'https://www.shroud.com/pdfs/cellulose1.pdf', category: 'FOLLOW_UP' },
-  { id: 26, authors: 'Jackson, J.P., E. Arthurs, L.A. Schwalbe, R.M. Sega, D.E. Windisch, W.H. Long, and E.A. Stappaerts', title: 'Infrared Laser Heating for Studies of Cellulose Degradation', publication: 'Applied Optics 27(18), pp. 3937-3943', year: 1988, pdfUrl: 'https://www.shroud.com/pdfs/cellulose2.pdf', category: 'FOLLOW_UP' },
-  { id: 27, authors: 'Dinegar, R.H. and L.A. Schwalbe', title: 'Isotope Measurements and Provenance Studies of the Turin Shroud', publication: 'Archaeological Chemistry IV, Advances in Chemistry Series 220, Chapter 23, pp. 409-417', year: 1989, abstractUrl: 'https://pubs.acs.org/doi/abs/10.1021/ba-1989-0220.ch023', category: 'FOLLOW_UP', notes: 'Abstract only - full paper available for purchase' },
-  { id: 28, authors: 'Doyle, L.R., J.J. Lorre and E.B. Doyle', title: 'The application of computer image processing techniques to artifact analysis as applied to the Shroud of Turin study', publication: 'Studies in Conservation, Vol. 31, No. 1, pp. 1-6', year: 1986, abstractUrl: 'https://www.jstor.org/stable/1506246', category: 'FOLLOW_UP', notes: 'Abstract only' },
-  { id: 29, authors: 'DeNiro, M.J., L. Sternberg, B. Marino and J. Drusik', title: 'Relation between D/H ratios and 18O and 16O ratios in cellulose from linen and maize', publication: 'Geochimica et Cosmochimica Acta, Vol. 52, pp. 2189-2196', year: 1988, pdfUrl: 'https://www.shroud.com/pdfs/deniro.pdf', category: 'FOLLOW_UP' },
-  { id: 30, authors: 'Rogers, Raymond N.', title: 'Studies on the radiocarbon sample from the Shroud of Turin', publication: 'Thermochimica Acta, Vol. 425, Issues 1-2, pp. 189-194', year: 2005, pdfUrl: 'https://www.shroud.com/pdfs/rogers8.pdf', category: 'FOLLOW_UP', notes: 'Critical paper about C14 sample contamination' },
-  { id: 31, authors: 'Devan, Donald, E. Jumper and J. Jackson', title: 'A Scientific Search for New Images on the Holy Shroud of Turin by Computer Enhancement', publication: 'Unpublished', year: 1974, pdfUrl: 'https://www.shroud.com/pdfs/devan1974.pdf', category: 'UNPUBLISHED' },
-  { id: 32, authors: 'Mottern, Robert W. "Bill"', title: 'The Testing of a Relic', publication: 'ASNT Fall Conference Proceedings, pp. 279-282', year: 1979, pdfUrl: 'https://www.shroud.com/pdfs/mottern1979.pdf', category: 'UNPUBLISHED' },
-  { id: 33, authors: 'Jumper, E.J., R.W. Mottern and J.P. Jackson', title: 'Nondestructive Testing of the Shroud of Turin: Project STURP', publication: 'Unpublished', year: 1979, pdfUrl: 'https://www.shroud.com/pdfs/ndt1979.pdf', category: 'UNPUBLISHED' },
-  { id: 34, authors: 'Lynn, Donald J.', title: 'Some Anthropological Evidence Pertinent to the Shroud of Turin', publication: 'Unpublished', year: 1980, pdfUrl: 'https://www.shroud.com/pdfs/lynn1980.pdf', category: 'UNPUBLISHED' },
-  { id: 35, authors: 'Riggi, Giovanni', title: 'The Dusts of the Holy Shroud of Turin - Progress Report', publication: 'STURP Meeting, New London, Connecticut', year: 1981, pdfUrl: 'https://www.shroud.com/pdfs/riggi1981.pdf', category: 'UNPUBLISHED', notes: 'Written before online translation - language may be awkward' },
-  { id: 36, authors: 'Soran, Diane', title: 'Transcript of Remarks at Meeting of STURP Members', publication: 'Espanola, New Mexico', year: 1979, pdfUrl: 'https://www.shroud.com/pdfs/soran1979.pdf', category: 'UNPUBLISHED', notes: 'Professionally transcribed audio from Los Alamos lab meeting' },
-  { id: 37, authors: 'Jumper, E.J. and J.P. Jackson (compilers)', title: 'Workshop Proceedings of the 1977 United States Conference on the Shroud of Turin', publication: 'Holy Shroud Guild', year: 1977, pdfUrl: 'https://www.shroud.com/pdfs/workshop1977.pdf', category: 'PROCEEDINGS', notes: '22 page summary of STURP planning' },
-  { id: 38, authors: 'Stevenson, Kenneth (Editor)', title: 'Full Proceedings of the 1977 United States Conference on the Shroud of Turin', publication: 'Holy Shroud Guild', year: 1977, pdfUrl: 'https://www.shroud.com/pdfs/proceedings1977.pdf', category: 'PROCEEDINGS', notes: '132 page complete proceedings volume' },
-  { id: 39, authors: 'Meacham, William (Archivist)', title: 'STURP II Testing Proposals 1984-88', publication: 'Archived Collection', year: 1988, abstractUrl: 'https://www.shroud.com/meacham2.htm', category: 'PROCEEDINGS', notes: 'Collection includes 1984, 1987, and 1988 testing proposals' },
+  { id: 1, authors: 'Accetta, J.S. and J.S. Baumgart', title: 'Infrared Reflectance Spectroscopy and Thermographic Investigations of the Shroud of Turin', publication: 'Applied Optics, Vol. 19, No. 12, pp. 1921-1929', year: 1980, pdfUrl: 'https://www.shroud.com/pdfs/Infrared%20Accetta%20Baumgart%201980%20OCR.pdf', category: 'REFEREED' },
+  { id: 2, authors: 'Avis, C., D. Lynn, J. Lorre, S. Lavoie, J. Clark, E. Armstrong, and J. Addington', title: 'Image Processing of the Shroud of Turin', publication: 'IEEE 1982 Proceedings of the International Conference on Cybernetics and Society, pp. 554-558', year: 1982, pdfUrl: 'https://www.shroud.com/pdfs/Image%20Processing%20Avis%20Lynn%20Lorre%20et%20al%201982%20OCRsm.pdf', category: 'REFEREED' },
+  { id: 3, authors: 'Devan, D. and V. Miller', title: 'Quantitative Photography of the Shroud of Turin', publication: 'IEEE 1982 Proceedings of the International Conference on Cybernetics and Society, pp. 548-553', year: 1982, pdfUrl: 'https://www.shroud.com/pdfs/Quantitative%20Photography%20Devan%20Miller%201982%20OCRsm.pdf', category: 'REFEREED' },
+  { id: 4, authors: 'Ercoline, W.R., R.C. Downs, Jr. and J.P. Jackson', title: 'Examination of the Turin Shroud for Image Distortions', publication: 'IEEE 1982 Proceedings of the International Conference on Cybernetics and Society, pp. 576-579', year: 1982, pdfUrl: 'https://www.shroud.com/pdfs/Examination%20for%20Image%20Distortions%20Ercoline%201982%20OCR.pdf', category: 'REFEREED' },
+  { id: 5, authors: 'Gilbert, R., Jr. and M.M. Gilbert', title: 'Ultraviolet-Visible Reflectance and Fluorescence Spectra of the Shroud of Turin', publication: 'Applied Optics, Vol. 19, No. 12, pp. 1930-1936', year: 1980, pdfUrl: 'https://www.shroud.com/pdfs/UV%20Spectra%20Gilbert%20Gilbert%201980%20OCR.pdf', category: 'REFEREED' },
+  { id: 6, authors: 'Heller, J.H. and A.D. Adler', title: 'Blood on the Shroud of Turin', publication: 'Applied Optics, Vol. 19, No. 16, pp. 2742-2744', year: 1980, pdfUrl: 'https://www.shroud.com/pdfs/Blood%20On%20The%20Shroud%20Heller%20Adler%201980%20OCR.pdf', category: 'REFEREED' },
+  { id: 7, authors: 'Heller, J.H. and A.D. Adler', title: 'A Chemical Investigation of the Shroud of Turin', publication: 'Canadian Society of Forensic Sciences Journal, Vol. 14, No. 3, pp. 81-103', year: 1981, pdfUrl: 'https://www.shroud.com/pdfs/Chemical%20Investigation%20%20Heller%20Adler%201981%20OCR.pdf', category: 'REFEREED' },
+  { id: 8, authors: 'Jackson, J.P., E.J. Jumper and W.R. Ercoline', title: 'Three Dimensional Characteristic of the Shroud Image', publication: 'IEEE 1982 Proceedings of the International Conference on Cybernetics and Society, pp. 559-575', year: 1982, pdfUrl: 'https://www.shroud.com/pdfs/3D%20Characteristic%20Jackson%20Jumper%201982%20OCR.pdf', category: 'REFEREED' },
+  { id: 9, authors: 'Jackson, J.P., E.J. Jumper, and W.R. Ercoline', title: 'Correlation of Image Intensity on the Turin Shroud with the 3-D Structure of a Human Body Shape', publication: 'Applied Optics, Vol. 23, No. 14, pp. 2244-2270', year: 1984, pdfUrl: 'https://www.shroud.com/pdfs/Correlation%20of%20Image%20Intensity%20Jackson%20Jumper%20Ercoline%201984%20OCRsm.pdf', category: 'REFEREED' },
+  { id: 10, authors: 'Jumper, E.J. and R.W. Mottern', title: 'Scientific Investigation of the Shroud of Turin', publication: 'Applied Optics, Vol. 19, No. 12, pp. 1909-1912', year: 1980, pdfUrl: 'https://www.shroud.com/pdfs/Scientific%20Investigation%20Jumper%20Mottern%201980%20OCRsm.pdf', category: 'REFEREED' },
+  { id: 11, authors: 'Jumper, E.J.', title: 'An Overview of the Testing Performed by the Shroud of Turin Research Project with a Summary of Results', publication: 'IEEE 1982 Proceedings of the International Conference on Cybernetics and Society, pp. 535-537', year: 1982, pdfUrl: 'https://www.shroud.com/pdfs/Overview%20of%20Testing%20with%20Summary%20of%20Results%20Jumper%201982%20OCRsm.pdf', category: 'REFEREED' },
+  { id: 12, authors: 'Jumper, E.J., A.D. Adler, J.P. Jackson, S.F. Pellicori, J.H. Heller and J.R. Drusik', title: 'A Comprehensive Examination of the Various Stains and Images on the Shroud of Turin', publication: 'Archaeological Chemistry III, ACS Advances in Chemistry No. 205, Chapter 22, pp. 447-476', year: 1984, pdfUrl: 'https://www.shroud.com/pdfs/Comprehensive%20Exam%20of%20Stains%20Jumper%20et%20al%201984%20OCR.pdf', category: 'REFEREED' },
+  { id: 13, authors: 'Miller, V.D. and S.F. Pellicori', title: 'Ultraviolet Fluorescence Photography of the Shroud of Turin', publication: 'Journal of Biological Photography, Vol. 49, No. 3, pp. 71-85', year: 1981, pdfUrl: 'https://www.shroud.com/pdfs/UV%20Fluorescence%20Miller%20Pellicori%201981%20OCRsm.pdf', category: 'REFEREED' },
+  { id: 14, authors: 'Morris, R.A., L.A. Schwalbe and J.R. London', title: 'X-Ray Fluorescence Investigation of the Shroud of Turin', publication: 'X-Ray Spectrometry, Vol. 9, No. 2, pp. 40-47', year: 1980, pdfUrl: 'https://www.shroud.com/pdfs/XRay%20Fluorescence%20Morris%20Schwalbe%20London%201980%20OCRsm.pdf', category: 'REFEREED' },
+  { id: 15, authors: 'Mottern, R.W., R.J. London and R.A. Morris', title: 'Radiographic Examination of the Shroud of Turin - A Preliminary Report', publication: 'Materials Evaluation, Vol. 38, No. 12, pp. 39-44', year: 1980, pdfUrl: 'https://www.shroud.com/pdfs/Radiographic%20Examination%20Preliminary%20Report%20Mottern%20London%20Morris%201979%20OCRsm.pdf', category: 'REFEREED' },
+  { id: 16, authors: 'Pellicori, S.F.', title: 'Spectral Properties of the Shroud of Turin', publication: 'Applied Optics, Vol. 19, No. 12, pp. 1913-1920', year: 1980, pdfUrl: 'https://www.shroud.com/pdfs/Spectral%20Properties%20Pellicori%201980%20OCRsm.pdf', category: 'REFEREED' },
+  { id: 17, authors: 'Pellicori, S. and M.S. Evans', title: 'The Shroud of Turin Through the Microscope', publication: 'Archaeology, January/February, pp. 34-43', year: 1981, pdfUrl: 'https://www.shroud.com/pdfs/Shroud%20Thru%20Microscope%20Pellicori%20Evans%201981%20OCRsm.pdf', category: 'REFEREED' },
+  { id: 18, authors: 'Pellicori, S.F. and R.A. Chandos', title: 'Portable Unit Permits UV/vis Study of Shroud', publication: 'Industrial Research and Development, February, pp. 186-189', year: 1981, pdfUrl: 'https://www.shroud.com/pdfs/Portable%20Unit%20Permits%20UV%20Pellicori%20Chandos%201981%20OCRsm.pdf', category: 'REFEREED' },
+  { id: 19, authors: 'Schwalbe, L.A. and R.N. Rogers', title: 'Physics and Chemistry of the Shroud of Turin, A Summary of the 1978 Investigation', publication: 'Analytica Chimica Acta, Vol. 135, pp. 3-49', year: 1982, pdfUrl: 'https://www.shroud.com/pdfs/Physics%20Chemistry%20of%20Shroud%20Schwalbe%20Rogers%201981%20OCRsm.pdf', category: 'REFEREED' },
+  { id: 20, authors: 'Schwortz, B.M.', title: 'Mapping of Research Test-Point Areas on the Shroud of Turin', publication: 'IEEE 1982 Proceedings of the International Conference on Cybernetics and Society, pp. 538-547', year: 1982, pdfUrl: 'https://www.shroud.com/pdfs/Mapping%20Research%20Test%20Points%20Schwortz%201982%20OCRsm.pdf', category: 'REFEREED' },
+  { id: 21, authors: 'Bucklin, Robert', title: "The Shroud of Turin: A Pathologist's Viewpoint", publication: 'Legal Medicine Annual, pp. 33-39', year: 1982, category: 'OTHER', notes: 'No PDF available online' },
+  { id: 22, authors: 'Dinegar, Robert Hudson', title: 'The Shroud of Turin - A Look at the Overall Picture', publication: 'The Living Church, May 17, pp. 9-11', year: 1981, category: 'OTHER', notes: 'No PDF available online' },
+  { id: 23, authors: 'Jumper, E.J., K. Stevenson, Jr., and J.P. Jackson', title: 'Images of Coins on a Burial Cloth?', publication: 'The Numismatist, July, pp. 1349-1357', year: 1978, pdfUrl: 'https://www.shroud.com/pdfs/coins1978.pdf', category: 'OTHER' },
+  { id: 24, authors: 'Miller, V., and D. Lynn', title: 'De Lijwade Van Turjin', publication: 'Natuur en Techniek, February, pp. 102-125', year: 1981, category: 'OTHER', notes: 'No PDF available online' },
+  { id: 25, authors: 'Jackson, J.P., E. Arthurs, L.A. Schwalbe, R.M. Sega, D.E. Windisch, W.H. Long, and E.A. Stappaerts', title: 'A New Tool for Cellulose Degradation Studies', publication: 'Materials Issues in Art and Archaeology: Symposium, Materials Research Society 123, pp. 311-316', year: 1988, category: 'FOLLOW_UP', notes: 'No PDF available online' },
+  { id: 26, authors: 'Jackson, J.P., E. Arthurs, L.A. Schwalbe, R.M. Sega, D.E. Windisch, W.H. Long, and E.A. Stappaerts', title: 'Infrared Laser Heating for Studies of Cellulose Degradation', publication: 'Applied Optics 27(18), pp. 3937-3943', year: 1988, category: 'FOLLOW_UP', notes: 'No PDF available online' },
+  { id: 27, authors: 'Dinegar, R.H. and L.A. Schwalbe', title: 'Isotope Measurements and Provenance Studies of the Turin Shroud', publication: 'Archaeological Chemistry IV, Advances in Chemistry Series 220, Chapter 23, pp. 409-417', year: 1989, pdfUrl: 'https://pubs.acs.org/doi/pdf/10.1021/ba-1988-0220.ch023', category: 'FOLLOW_UP', notes: 'Abstract/purchase required' },
+  { id: 28, authors: 'Doyle, L.R., J.J. Lorre and E.B. Doyle', title: 'The application of computer image processing techniques to artifact analysis as applied to the Shroud of Turin study', publication: 'Studies in Conservation, Vol. 31, No. 1, pp. 1-6', year: 1986, abstractUrl: 'http://www.iiconservation.org/node/632', category: 'FOLLOW_UP', notes: 'Abstract only' },
+  { id: 29, authors: 'DeNiro, M.J., L. Sternberg, B. Marino and J. Drusik', title: 'Relation between D/H ratios and 18O and 16O ratios in cellulose from linen and maize', publication: 'Geochimica et Cosmochimica Acta, Vol. 52, pp. 2189-2196', year: 1988, pdfUrl: 'https://www.shroud.com/pdfs/Relation%20between%20DH%20ratios%20Druzik%201988.pdf', category: 'FOLLOW_UP' },
+  { id: 30, authors: 'Rogers, Raymond N.', title: 'Studies on the radiocarbon sample from the Shroud of Turin', publication: 'Thermochimica Acta, Vol. 425, Issues 1-2, pp. 189-194', year: 2005, pdfUrl: 'http://www.shroud.it/ROGERS-3.PDF', category: 'FOLLOW_UP', notes: 'Critical paper about C14 sample contamination' },
+  { id: 31, authors: 'Devan, Donald, E. Jumper and J. Jackson', title: 'A Scientific Search for New Images on the Holy Shroud of Turin by Computer Enhancement', publication: 'Unpublished', year: 1974, pdfUrl: 'https://www.shroud.com/pdfs/Devan%201974%20OCR.pdf', category: 'UNPUBLISHED' },
+  { id: 32, authors: 'Mottern, Robert W. "Bill"', title: 'The Testing of a Relic', publication: 'ASNT Fall Conference Proceedings, pp. 279-282', year: 1979, pdfUrl: 'https://www.shroud.com/pdfs/Mottern%20ASNT%201979%20OCR.pdf', category: 'UNPUBLISHED' },
+  { id: 33, authors: 'Jumper, E.J., R.W. Mottern and J.P. Jackson', title: 'Nondestructive Testing of the Shroud of Turin: Project STURP', publication: 'Unpublished', year: 1979, pdfUrl: 'https://www.shroud.com/pdfs/Jumper%20Non%20Destructive%20Testing%201979%20OCR.pdf', category: 'UNPUBLISHED' },
+  { id: 34, authors: 'Lynn, Donald J.', title: 'Some Anthropological Evidence Pertinent to the Shroud of Turin', publication: 'Unpublished', year: 1980, pdfUrl: 'https://www.shroud.com/pdfs/Lynn%20circa%201980%20OCR.pdf', category: 'UNPUBLISHED' },
+  { id: 35, authors: 'Riggi, Giovanni', title: 'The Dusts of the Holy Shroud of Turin - Progress Report', publication: 'STURP Meeting, New London, Connecticut', year: 1981, pdfUrl: 'https://www.shroud.com/pdfs/Riggi%201981%20New%20London%20OCR.pdf', category: 'UNPUBLISHED', notes: 'Written before online translation - language may be awkward' },
+  { id: 36, authors: 'Soran, Diane', title: 'Transcript of Remarks at Meeting of STURP Members', publication: 'Espanola, New Mexico', year: 1979, pdfUrl: 'https://www.shroud.com/pdfs/Soran%20transcript%201979.pdf', category: 'UNPUBLISHED', notes: 'Professionally transcribed audio from Los Alamos lab meeting' },
+  { id: 37, authors: 'Jumper, E.J. and J.P. Jackson (compilers)', title: 'Workshop Proceedings of the 1977 United States Conference on the Shroud of Turin', publication: 'Holy Shroud Guild', year: 1977, pdfUrl: 'https://www.shroud.com/pdfs/Workshop%201977%20STURP%20Albuquerque%20meeting%20OCR.pdf', category: 'PROCEEDINGS', notes: '22 page summary of STURP planning' },
+  { id: 38, authors: 'Stevenson, Kenneth (Editor)', title: 'Full Proceedings of the 1977 United States Conference on the Shroud of Turin', publication: 'Holy Shroud Guild', year: 1977, pdfUrl: 'https://www.shroud.com/pdfs/Full%20Proceedings%20-%20Albuquerque%201977%20OCR.pdf', category: 'PROCEEDINGS', notes: '132 page complete proceedings volume' },
+  { id: 39, authors: 'Meacham, William (Archivist)', title: 'STURP II Testing Proposals 1984-88', publication: 'Archived Collection', year: 1988, pdfUrl: 'http://shroud.com/pdfs/STURP%20Formal%20Proposal%201984.pdf', category: 'PROCEEDINGS', notes: 'Collection includes 1984, 1987, and 1988 testing proposals' },
   { id: 40, authors: 'Lukasik, S.J.', title: 'Some Speculations Concerning the Process Leading to the Formation of the Image on the Shroud of Turin', publication: 'Previously Unpublished', year: 1985, pdfUrl: 'https://www.shroud.com/pdfs/lukasik1985.pdf', category: 'UNPUBLISHED', notes: 'By the VP of Northrop Corp and former ARPA director' }
 ];

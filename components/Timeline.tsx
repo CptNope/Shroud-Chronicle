@@ -1,7 +1,7 @@
 import React from 'react';
-import { EVENTS } from '../constants';
+import { EVENTS, STURP_PAPERS } from '../constants';
 import { LensMode, TimelineEvent } from '../types';
-import { Microscope, Scroll, Flame, Camera, Radio, ExternalLink } from 'lucide-react';
+import { Microscope, Scroll, Flame, Camera, Radio, ExternalLink, FileText } from 'lucide-react';
 
 interface TimelineProps {
   lens: LensMode;
@@ -111,6 +111,34 @@ export const Timeline: React.FC<TimelineProps> = ({ lens }) => {
                          Lab ID: {event.labId}
                        </span>
                      </div>
+                  )}
+
+                  {event.paperRefs && event.paperRefs.length > 0 && (
+                    <div className="mt-3 pt-3 border-t border-neutral-800">
+                      <div className="flex items-center gap-1 mb-2">
+                        <FileText size={12} className="text-neutral-500" />
+                        <span className="text-[10px] uppercase tracking-wider text-neutral-500">STURP Papers</span>
+                      </div>
+                      <div className="flex flex-wrap gap-1">
+                        {event.paperRefs.map(id => {
+                          const paper = STURP_PAPERS.find(p => p.id === id);
+                          if (!paper) return null;
+                          const url = paper.pdfUrl || paper.abstractUrl;
+                          return url ? (
+                            <a
+                              key={id}
+                              href={url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={`text-[10px] px-2 py-0.5 rounded border transition-colors ${lens === 'BELIEVER' ? 'border-amber-900/50 text-amber-400/70 hover:bg-amber-900/20' : 'border-cyan-900/50 text-cyan-400/70 hover:bg-cyan-900/20'}`}
+                              title={paper.title}
+                            >
+                              #{id}
+                            </a>
+                          ) : null;
+                        })}
+                      </div>
+                    </div>
                   )}
                 </div>
               </div>

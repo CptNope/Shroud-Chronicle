@@ -1,8 +1,8 @@
 import React from 'react';
-import { LABS } from '../constants';
+import { LABS, STURP_PAPERS } from '../constants';
 import { LensMode } from '../types';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, Legend, AreaChart, Area, Cell, ReferenceLine } from 'recharts';
-import { ExternalLink, Info, AlertTriangle, CheckCircle, Microscope, FlaskConical } from 'lucide-react';
+import { ExternalLink, Info, AlertTriangle, CheckCircle, Microscope, FlaskConical, FileText } from 'lucide-react';
 
 interface ForensicLabsProps {
   lens: LensMode;
@@ -432,6 +432,33 @@ export const ForensicLabs: React.FC<ForensicLabsProps> = ({ lens }) => {
                 <span className="text-xs uppercase tracking-wider text-neutral-500 block mb-1">Key Findings</span>
                 <p className="text-sm text-neutral-300">{lab.findings}</p>
               </div>
+              {lab.paperRefs && lab.paperRefs.length > 0 && (
+                <div className="md:col-span-2 pt-2">
+                  <div className="flex items-center gap-1 mb-2">
+                    <FileText size={12} className="text-neutral-500" />
+                    <span className="text-[10px] uppercase tracking-wider text-neutral-500">Related Papers</span>
+                  </div>
+                  <div className="flex flex-wrap gap-1">
+                    {lab.paperRefs.map(id => {
+                      const paper = STURP_PAPERS.find(p => p.id === id);
+                      if (!paper) return null;
+                      const url = paper.pdfUrl || paper.abstractUrl;
+                      return url ? (
+                        <a
+                          key={id}
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`text-[10px] px-2 py-0.5 rounded border transition-colors ${lens === lab.lens ? (lens === 'BELIEVER' ? 'border-amber-900/50 text-amber-400/70 hover:bg-amber-900/20' : 'border-cyan-900/50 text-cyan-400/70 hover:bg-cyan-900/20') : 'border-neutral-700 text-neutral-500 hover:bg-neutral-800'}`}
+                          title={paper.title}
+                        >
+                          #{id}
+                        </a>
+                      ) : null;
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         ))}
