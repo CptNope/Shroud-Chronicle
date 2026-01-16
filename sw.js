@@ -1,7 +1,7 @@
 // ============================================
 // Service Worker Version Management
 // ============================================
-// VERSION: 2.0.0
+// VERSION: 2.1.0
 // UPDATED: 2026-01-15
 // 
 // To trigger client updates:
@@ -10,11 +10,11 @@
 // 3. Deploy - clients will auto-update
 // ============================================
 
-const CACHE_VERSION = '2.0.0';
+const CACHE_VERSION = '2.1.0';
 const CACHE_NAME = `shroud-chronicle-v${CACHE_VERSION}`;
+const IMAGE_CACHE_NAME = `shroud-images-v${CACHE_VERSION}`;
 
-// Precache local app shell files only
-// External URLs (CDNs) are cached dynamically via fetch listener
+// Precache local app shell files
 const PRECACHE_URLS = [
   './',
   './index.html',
@@ -24,47 +24,124 @@ const PRECACHE_URLS = [
   './icons/apple-touch-icon.png'
 ];
 
+// Critical external images to precache for offline use
+const CRITICAL_IMAGES = [
+  'https://upload.wikimedia.org/wikipedia/commons/e/ec/Secundo_Pia_Turinske_platno_1898.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/7/75/Turin_face_positive.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/2/23/Turin_shroud_positive_and_negative_displaying_original_color_information_708_x_465_pixels_94_KB.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/9/9d/Shroudofturin.jpg'
+];
+
+// Helper to check if request is for an image
+function isImageRequest(request) {
+  const url = request.url;
+  return url.match(/\.(jpg|jpeg|png|gif|webp|svg|ico)(\?.*)?$/i) ||
+         url.includes('wikimedia.org') ||
+         url.includes('wikipedia.org') ||
+         url.includes('picsum.photos') ||
+         request.destination === 'image';
+}
+
 self.addEventListener('install', (event) => {
   // DO NOT call skipWaiting here - let the user decide when to update
-  // The UpdateNotification component will send SKIP_WAITING message when user clicks refresh
   console.log(`[SW] Installing version ${CACHE_VERSION}`);
   
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      console.log(`[SW] Caching app shell for version ${CACHE_VERSION}`);
-      return cache.addAll(PRECACHE_URLS);
-    })
+    Promise.all([
+      // Cache app shell
+      caches.open(CACHE_NAME).then((cache) => {
+        console.log(`[SW] Caching app shell for version ${CACHE_VERSION}`);
+        return cache.addAll(PRECACHE_URLS);
+      }),
+      // Cache critical images for offline use
+      caches.open(IMAGE_CACHE_NAME).then((cache) => {
+        console.log(`[SW] Precaching ${CRITICAL_IMAGES.length} critical images`);
+        return Promise.all(
+          CRITICAL_IMAGES.map((url) => 
+            fetch(url, { mode: 'cors' })
+              .then((response) => {
+                if (response.ok) {
+                  cache.put(url, response);
+                  console.log(`[SW] Cached: ${url.split('/').pop()}`);
+                }
+              })
+              .catch((err) => console.log(`[SW] Failed to cache: ${url}`, err))
+          )
+        );
+      })
+    ])
   );
 });
 
 // Clean up old caches when a new SW is activated
 self.addEventListener('activate', (event) => {
+  const currentCaches = [CACHE_NAME, IMAGE_CACHE_NAME];
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
+          // Delete caches that aren't in our current set
+          if (!currentCaches.includes(cacheName)) {
+            console.log(`[SW] Deleting old cache: ${cacheName}`);
             return caches.delete(cacheName);
           }
         })
       );
-    }).then(() => self.clients.claim()) // Immediately control all open clients
+    }).then(() => self.clients.claim())
   );
 });
 
-// Stale-While-Revalidate Strategy
+// Fetch handler with special image caching strategy
 self.addEventListener('fetch', (event) => {
-  // Handle cross-origin requests (CDNs) gracefully
+  const request = event.request;
+  
+  // Images: Cache-first, then network (for offline support)
+  if (isImageRequest(request)) {
+    event.respondWith(
+      caches.open(IMAGE_CACHE_NAME).then((cache) => {
+        return cache.match(request).then((cachedResponse) => {
+          if (cachedResponse) {
+            // Return cached image immediately, update in background
+            fetch(request, { mode: 'cors' })
+              .then((networkResponse) => {
+                if (networkResponse && networkResponse.ok) {
+                  cache.put(request, networkResponse.clone());
+                }
+              })
+              .catch(() => {}); // Silently fail background update
+            return cachedResponse;
+          }
+          
+          // Not in cache - fetch and cache for next time
+          return fetch(request, { mode: 'cors' })
+            .then((networkResponse) => {
+              if (networkResponse && networkResponse.ok) {
+                cache.put(request, networkResponse.clone());
+              }
+              return networkResponse;
+            })
+            .catch((err) => {
+              console.log('[SW] Image fetch failed:', request.url);
+              // Return a placeholder or nothing for failed images
+              return new Response('', { status: 404, statusText: 'Image not available offline' });
+            });
+        });
+      })
+    );
+    return;
+  }
+  
+  // Non-images: Stale-While-Revalidate strategy
   event.respondWith(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.match(event.request).then((response) => {
-        const fetchPromise = fetch(event.request).then((networkResponse) => {
-          if (networkResponse) {
-            cache.put(event.request, networkResponse.clone());
+      return cache.match(request).then((response) => {
+        const fetchPromise = fetch(request).then((networkResponse) => {
+          if (networkResponse && networkResponse.ok) {
+            cache.put(request, networkResponse.clone());
           }
           return networkResponse;
         }).catch((err) => {
-          console.log('Network fetch failed for:', event.request.url);
+          console.log('[SW] Network fetch failed:', request.url);
         });
         return response || fetchPromise;
       });
